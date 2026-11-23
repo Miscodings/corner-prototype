@@ -8,390 +8,374 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
-/* Layout: a phone-sized app centred on desktop (with a tester panel beside it), full-bleed on phones.
-   Identity: NYU violet for action, supermarket price-sticker yellow for deals, violet-tinted neutrals. */
+/* Layout: phone-sized app centred on desktop with a facilitator panel; full-bleed on phones.
+   Identity: strict monochrome. Price-tag labels, deli-receipt typography, hatched transit-map cartography. */
 :root{
-  --bg:#ECE9F1; --surface:#FBFAFD; --card:#FFFFFF; --fg:#1C1523; --muted:#6B6276; --line:#E5E0EB;
-  --accent:#57068C; --accent-ink:#FFFFFF; --accent-soft:#F1E7F9;
-  --tag:#FFD23F; --tag-ink:#2A1E00;
-  --good:#1D7F47; --good-soft:#E3F4EA; --danger:#B9332A;
-  --frame:#17121D; --scrim:rgba(20,12,28,.42); --shadow:0 1px 2px rgba(28,21,35,.06),0 8px 24px rgba(28,21,35,.08);
-  --map-land:#F2EFF5; --map-water:#CFE0F1; --map-park:#D5EACB; --map-street:#FFFFFF; --map-label:#7C7288;
-  --cat-food:#57068C; --cat-groceries:#1D7F47; --cat-clothes:#C2410C;
-  --qr-bg:#FFFFFF; --qr-fg:#15101A;
-  --f-display:"Bricolage Grotesque", "Inter", system-ui, sans-serif;
-  --f-body:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bg:#E4E4E2; --paper:#FFFFFF; --ink:#0B0B0B; --ink-2:#5E5E5C; --hair:#DEDEDC; --wash:#F3F3F1; --pat:#C9C9C6;
+  --frame:#0B0B0B; --scrim:rgba(0,0,0,.45);
+  --qr-bg:#FFFFFF; --qr-fg:#0B0B0B;
+  --f-sans:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --r:6px;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --bg:#0D0A11; --surface:#16121C; --card:#211B29; --fg:#F2EDF7; --muted:#A99FB4; --line:#30293A;
-  --accent:#C09AF0; --accent-ink:#1A0F24; --accent-soft:#2D2140;
-  --tag:#F4C83A; --tag-ink:#241A00;
-  --good:#5CCB8C; --good-soft:#173527; --danger:#FF8577;
-  --frame:#000000; --scrim:rgba(0,0,0,.6); --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
-  --map-land:#1D1826; --map-water:#1A2A3E; --map-park:#1E3325; --map-street:#2B2436; --map-label:#8E84A0;
-  --cat-food:#C09AF0; --cat-groceries:#5CCB8C; --cat-clothes:#FB923C;
-  color-scheme:dark;
+  --bg:#000000; --paper:#0E0E0E; --ink:#F4F4F2; --ink-2:#9C9C99; --hair:#262626; --wash:#181818; --pat:#3A3A38;
+  --frame:#1C1C1C; --scrim:rgba(0,0,0,.65); color-scheme:dark;
 }}
 :root[data-theme="dark"]{
-  --bg:#0D0A11; --surface:#16121C; --card:#211B29; --fg:#F2EDF7; --muted:#A99FB4; --line:#30293A;
-  --accent:#C09AF0; --accent-ink:#1A0F24; --accent-soft:#2D2140;
-  --tag:#F4C83A; --tag-ink:#241A00;
-  --good:#5CCB8C; --good-soft:#173527; --danger:#FF8577;
-  --frame:#000000; --scrim:rgba(0,0,0,.6); --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
-  --map-land:#1D1826; --map-water:#1A2A3E; --map-park:#1E3325; --map-street:#2B2436; --map-label:#8E84A0;
-  --cat-food:#C09AF0; --cat-groceries:#5CCB8C; --cat-clothes:#FB923C;
-  color-scheme:dark;
+  --bg:#000000; --paper:#0E0E0E; --ink:#F4F4F2; --ink-2:#9C9C99; --hair:#262626; --wash:#181818; --pat:#3A3A38;
+  --frame:#1C1C1C; --scrim:rgba(0,0,0,.65); color-scheme:dark;
 }
 html,body{height:100%}
-body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-sans);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow:hidden}
 *{box-sizing:border-box}
-button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:inherit}
 input,textarea{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
-h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+h1,h2,h3{margin:0;text-wrap:balance}
 p{margin:0}
-.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
 
 /* ---------- Stage ---------- */
-.stage{height:100%;display:flex;align-items:center;justify-content:center;gap:56px;padding-block:24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.device{width:390px;height:min(844px,calc(100% - 0px));background:var(--frame);border-radius:54px;padding:11px;box-shadow:0 30px 80px rgba(20,10,30,.25);flex:none}
-.app{position:relative;height:100%;border-radius:44px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column}
+.stage{height:100%;display:flex;align-items:center;justify-content:center;gap:64px;padding-block:24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.device{width:390px;height:100%;max-height:844px;background:var(--frame);border-radius:52px;padding:10px;flex:none}
+.app{position:relative;height:100%;border-radius:43px;overflow:hidden;background:var(--paper);display:flex;flex-direction:column}
 .status{height:46px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:6px 30px 0 34px;font-weight:600;font-size:15px;position:relative;z-index:5}
-.status .notch{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:118px;height:32px;background:var(--frame);border-radius:20px}
+.status .notch{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:116px;height:32px;background:var(--frame);border-radius:20px}
 .status .sys{display:flex;gap:6px;align-items:center}
-.side{width:300px;flex:none;align-self:center;display:flex;flex-direction:column;gap:18px;max-height:100%;overflow:auto}
-.side .brand{font-family:var(--f-display);font-weight:800;font-size:34px;letter-spacing:-.02em;color:var(--accent);line-height:1}
-.side p{color:var(--muted);font-size:14px}
-.side h3{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-family:var(--f-body);font-weight:600}
-.side ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;font-size:14px}
-.side ol li::marker{color:var(--accent);font-weight:700}
-.side .persona{color:var(--muted);font-size:12px;display:block}
-.side .row{display:flex;gap:8px;flex-wrap:wrap}
-.side details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
-.side summary{cursor:pointer;font-weight:600}
-.side details[open] summary{margin-bottom:12px}
+.side{width:290px;flex:none;display:flex;flex-direction:column;gap:22px;max-height:100%;overflow:auto}
+.side .brand{font-weight:800;font-stretch:68%;font-size:56px;line-height:.85;letter-spacing:-.01em;text-transform:uppercase}
+.side p{color:var(--ink-2);font-size:14px}
+.side .lbl{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-2);border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:12px;display:block}
+.side ol{margin:0;padding:0;list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:12px;font-size:14px}
+.side ol li{counter-increment:t;display:grid;grid-template-columns:26px 1fr;gap:2px}
+.side ol li::before{content:counter(t,decimal-leading-zero);font-family:var(--f-mono);font-size:12px;color:var(--ink-2);padding-top:1px}
+.side .persona{grid-column:2;color:var(--ink-2);font-size:12px;font-family:var(--f-mono)}
+.side .fac{display:flex;flex-direction:column;border-top:1px solid var(--hair)}
+.side .fac button{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--hair);font-weight:600;font-size:14px}
+.side .fac button:hover{text-decoration:underline}
 @media (max-width:980px){.side{display:none}}
 @media (max-width:560px){
   .stage{padding:0}
-  .device{width:100%;height:100%;border-radius:0;padding:0;box-shadow:none;background:var(--surface)}
+  .device{width:100%;height:100%;max-height:none;border-radius:0;padding:0;background:var(--paper)}
   .app{border-radius:0}
   .status{display:none}
 }
 
 /* ---------- Views ---------- */
 .view{position:relative;flex:1;min-height:0;overflow:hidden}
-.screen{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--surface)}
-.screen.push{animation:pushIn .28s cubic-bezier(.2,.8,.2,1)}
-.screen.back{animation:backIn .24s ease-out}
-.screen.fade{animation:fadeIn .18s ease-out}
-.screen.up{animation:upIn .3s cubic-bezier(.2,.8,.2,1)}
-@keyframes pushIn{from{transform:translateX(36px);opacity:.4}to{transform:none;opacity:1}}
-@keyframes backIn{from{transform:translateX(-24px);opacity:.5}to{transform:none;opacity:1}}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--paper)}
+.screen.push{animation:pushIn .26s cubic-bezier(.2,.8,.2,1)}
+.screen.back{animation:backIn .22s ease-out}
+.screen.fade{animation:fadeIn .16s ease-out}
+.screen.up{animation:upIn .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes pushIn{from{transform:translateX(32px);opacity:.4}to{transform:none;opacity:1}}
+@keyframes backIn{from{transform:translateX(-20px);opacity:.5}to{transform:none;opacity:1}}
 @keyframes fadeIn{from{opacity:.3}to{opacity:1}}
-@keyframes upIn{from{transform:translateY(40px);opacity:.3}to{transform:none;opacity:1}}
-.scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+@keyframes upIn{from{transform:translateY(36px);opacity:.3}to{transform:none;opacity:1}}
+.scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
 .scroll::-webkit-scrollbar{display:none}
-.pad{padding:4px max(20px,env(safe-area-inset-right,0px)) 28px max(20px,env(safe-area-inset-left,0px))}
+.pad{padding:0 max(20px,env(safe-area-inset-right,0px)) 32px max(20px,env(safe-area-inset-left,0px))}
 .stack{display:flex;flex-direction:column;gap:12px}
-.stack-lg{display:flex;flex-direction:column;gap:22px}
+.stack-lg{display:flex;flex-direction:column;gap:26px}
 
-.top{flex:none;display:flex;align-items:center;gap:8px;min-height:56px;padding:6px max(20px,env(safe-area-inset-right,0px)) 6px max(20px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line);background:var(--surface)}
-.top h1{font-size:26px;font-weight:800;flex:1;min-width:0}
-.top h1.sm{font-size:18px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.top .back{width:36px;height:36px;margin-left:-8px;display:grid;place-items:center;border-radius:50%}
-.icon-btn{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;position:relative;flex:none}
-.icon-btn:hover,.top .back:hover{background:var(--accent-soft)}
-.icon-btn .dot{position:absolute;top:8px;right:9px;width:9px;height:9px;border-radius:50%;background:var(--danger);border:2px solid var(--surface)}
+.top{flex:none;display:flex;align-items:flex-end;gap:8px;min-height:58px;padding:8px 20px 10px;border-bottom:1px solid var(--ink);background:var(--paper)}
+.top h1{font-size:32px;font-weight:800;font-stretch:70%;line-height:1;flex:1;min-width:0;letter-spacing:-.005em}
+.top.sub{align-items:center;min-height:54px;padding-block:6px;border-bottom-color:var(--hair)}
+.top h1.sm{font-size:17px;font-weight:700;font-stretch:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .back{width:36px;height:36px;margin-left:-8px;display:grid;place-items:center}
+.icon-btn{width:40px;height:40px;display:grid;place-items:center;position:relative;flex:none;margin-bottom:-4px}
+.top.sub .icon-btn{margin-bottom:0}
+.icon-btn .dot{position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--ink);border:2px solid var(--paper)}
 svg.i{display:block;flex:none}
 
 /* ---------- Tab bar ---------- */
-.tabbar{flex:none;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px 10px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--surface)}
-.tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0 6px;border-radius:16px;color:var(--muted);font-size:12px;font-weight:600}
-.tab.on{background:var(--accent-soft);color:var(--accent)}
-.tab .badge{position:absolute}
+.tabbar{flex:none;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);background:var(--paper);padding-bottom:calc(6px + env(safe-area-inset-bottom,0px))}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 6px;color:var(--ink-2);font-size:11px;font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.08em;position:relative}
+.tab.on{color:var(--ink);font-weight:600}
+.tab.on::before{content:"";position:absolute;top:-1px;left:22%;right:22%;height:3px;background:var(--ink)}
 
 /* ---------- Controls ---------- */
-.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-inline:-20px;padding-inline:20px}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-inline:-20px;padding-inline:20px}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex:none;height:36px;padding:0 15px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
-.chip.on{background:var(--fg);color:var(--surface);border-color:var(--fg)}
-.chip .cnt{background:var(--accent);color:var(--accent-ink);border-radius:999px;font-size:11px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 5px}
-.chip.sm{height:30px;padding:0 11px;font-size:13px}
-.btn{height:52px;border-radius:16px;padding:0 20px;font-weight:700;font-size:16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%}
-.btn.primary{background:var(--accent);color:var(--accent-ink)}
-.btn.primary:disabled{opacity:.45;cursor:not-allowed}
-.btn.outline{border:1.5px solid var(--line);background:var(--card)}
-.btn.danger{background:var(--danger);color:#fff}
-.btn.ghost{color:var(--accent);height:44px}
-.link{color:var(--accent);font-weight:600;font-size:14px}
+.chip{flex:none;height:34px;padding:0 13px;border-radius:4px;border:1px solid var(--ink);background:var(--paper);font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.chip.on{background:var(--ink);color:var(--paper)}
+.chip.ghost{border-color:var(--hair)}
+.chip .cnt{font-family:var(--f-mono);font-size:12px}
+.chip.sm{height:30px;padding:0 10px;font-size:13px}
+.btn{height:52px;border-radius:var(--r);padding:0 20px;font-weight:700;font-size:16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;text-align:center}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.primary:disabled{opacity:.35;cursor:not-allowed}
+.btn.outline{border:1px solid var(--ink);background:var(--paper)}
+.btn.text{height:44px;text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.link{font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px}
 .field{display:flex;flex-direction:column;gap:6px}
-.field label{font-size:13px;font-weight:600;color:var(--muted)}
-.input{height:52px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);padding:0 14px;width:100%;font-size:16px}
-.input:focus{outline:none;border-color:var(--accent)}
-.err{color:var(--danger);font-size:13px;font-weight:500}
-.hint{color:var(--muted);font-size:13px}
+.field label,.label-sm{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-2)}
+.input{height:52px;border:1px solid var(--ink);border-radius:var(--r);background:var(--paper);padding:0 14px;width:100%;font-size:16px}
+.input:focus{outline:2px solid var(--ink);outline-offset:-1px}
+.err{font-size:13px;font-weight:600;display:flex;gap:6px;align-items:center}
+.err::before{content:"!";display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:11px;font-weight:800;flex:none}
+.hint{color:var(--ink-2);font-size:13px}
 
-/* deal sticker: the yellow price tag with a punched hole */
-.sticker{display:inline-flex;align-items:center;gap:4px;background:var(--tag);color:var(--tag-ink);font-weight:700;font-size:12.5px;line-height:1;padding:6px 9px 6px 15px;border-radius:5px 7px 7px 5px;position:relative;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
-.sticker::before{content:"";position:absolute;left:5px;top:50%;width:5px;height:5px;margin-top:-2.5px;border-radius:50%;background:var(--card)}
-.pill{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 10px;border-radius:999px;font-size:12.5px;font-weight:600;border:1.5px solid var(--line);color:var(--muted);white-space:nowrap}
-.pill.good{background:var(--good-soft);color:var(--good);border-color:transparent}
-.bullet{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-size:11.5px;font-weight:700;color:#fff;background:var(--b);font-family:Helvetica,Arial,sans-serif}
-.bullet.y{color:#1a1a1a}
-.bus{font-size:12px;font-weight:700;padding:2px 6px;border-radius:5px;background:#0B5FA5;color:#fff}
+/* deal label: an inverted price tag */
+.tag{display:inline-flex;align-items:center;background:var(--ink);color:var(--paper);font-family:var(--f-mono);font-weight:600;font-size:11.5px;line-height:1;letter-spacing:.04em;text-transform:uppercase;padding:5px 7px 5px 6px;border-radius:2px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.tag.lg{font-size:13px;padding:8px 10px}
+.flag{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 7px;border:1px solid var(--ink);border-radius:2px;font-family:var(--f-mono);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.bullet{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:50%;font-size:11px;font-weight:700;color:var(--paper);background:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif}
+.bus{font-family:var(--f-mono);font-size:11px;font-weight:600;padding:2px 5px;border:1px solid var(--ink);border-radius:2px}
+
+/* monochrome image tiles (stand-ins for photos) */
+.tile{position:relative;overflow:hidden;background-color:var(--wash);display:block}
+.tile.p0{background-image:radial-gradient(var(--pat) 1.1px,transparent 1.4px);background-size:7px 7px}
+.tile.p1{background-image:repeating-linear-gradient(135deg,var(--pat) 0 1px,transparent 1px 7px)}
+.tile.p2{background-image:repeating-linear-gradient(90deg,var(--pat) 0 1px,transparent 1px 9px),repeating-linear-gradient(0deg,var(--pat) 0 1px,transparent 1px 9px)}
+.tile .mg{position:absolute;right:10px;bottom:4px;font-weight:800;font-stretch:62%;font-size:64px;line-height:.9;letter-spacing:-.02em;color:var(--ink)}
+.tile .cap{position:absolute;left:10px;top:10px;font-family:var(--f-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;background:var(--paper);padding:3px 6px;border:1px solid var(--ink)}
+.thumb{width:52px;height:52px;flex:none;border:1px solid var(--ink);border-radius:2px;display:grid;place-items:center}
+.thumb .mg{position:static;font-size:22px;font-weight:800;font-stretch:62%;background:var(--paper);padding:0 3px;line-height:1.1}
 
 /* ---------- Explore ---------- */
-.search-row{display:flex;gap:10px;align-items:center}
-.search-field{flex:1;min-width:0;display:flex;align-items:center;height:50px;border:1.5px solid var(--line);border-radius:999px;background:var(--card);padding:0 6px 0 16px}
-.search-open{flex:1;min-width:0;display:flex;align-items:center;gap:10px;height:100%;color:var(--muted);text-align:left}
+.search-row{display:flex;gap:8px;align-items:stretch}
+.search-field{flex:1;min-width:0;display:flex;align-items:center;height:48px;border:1px solid var(--ink);border-radius:var(--r);background:var(--paper);padding:0 4px 0 14px}
+.search-open{flex:1;min-width:0;display:flex;align-items:center;gap:10px;height:100%;color:var(--ink-2)}
 .search-open span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.vr{width:1.5px;height:24px;background:var(--line);margin:0 4px}
-.loc-btn{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;color:var(--accent)}
-.avatar{width:50px;height:50px;border-radius:50%;border:1.5px solid var(--line);background:var(--accent-soft);color:var(--accent);font-weight:700;font-family:var(--f-display);font-size:17px;display:grid;place-items:center;flex:none}
-.area-line{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;margin-top:-8px}
-.area-line b{color:var(--fg);font-weight:600}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
-section h2{font-size:19px;font-weight:700}
-section > h2{margin-bottom:12px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;text-align:left;display:flex;flex-direction:column;cursor:pointer;position:relative}
-.card:hover{box-shadow:var(--shadow)}
-.ph{position:relative;display:grid;place-items:center;overflow:hidden}
-.ph .em{font-size:44px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.18))}
-.ph::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 30% 20%,rgba(255,255,255,.35),transparent 55%)}
-.card .ph{height:104px}
-.card .ph .sticker{position:absolute;left:8px;bottom:8px;z-index:1;max-width:calc(100% - 16px)}
-.card .save-mini{position:absolute;top:8px;right:8px;z-index:2;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.92);color:#2a2030;display:grid;place-items:center}
-.card .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px;min-width:0}
-.card .name{font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.meta{color:var(--muted);font-size:12.5px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.meta .star{color:var(--fg);font-weight:600;display:inline-flex;gap:3px;align-items:center}
+.vr{width:1px;height:26px;background:var(--hair);margin:0 4px}
+.loc-btn{width:40px;height:40px;display:grid;place-items:center}
+.avatar{width:48px;height:48px;border-radius:50%;border:1px solid var(--ink);background:var(--paper);font-weight:800;font-stretch:75%;font-size:19px;display:grid;place-items:center;flex:none}
+.area-line{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.06em}
+.area-line b{color:var(--ink);font-weight:600}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:8px;margin-bottom:14px}
+section h2{font-size:21px;font-weight:800;font-stretch:75%;line-height:1.1}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px 12px}
+.card{text-align:left;display:flex;flex-direction:column;gap:8px;cursor:pointer;position:relative;min-width:0}
+.card .tile{height:112px;border:1px solid var(--ink);border-radius:2px}
+.card .tile .mg{font-size:52px}
+.card .tile .tag{position:absolute;left:8px;top:8px;max-width:calc(100% - 52px)}
+.card .save-mini{position:absolute;top:6px;right:6px;z-index:2;width:32px;height:32px;background:var(--paper);border:1px solid var(--ink);border-radius:2px;display:grid;place-items:center}
+.card .name{font-weight:700;font-size:15px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta{color:var(--ink-2);font-family:var(--f-mono);font-size:11.5px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;text-transform:uppercase;letter-spacing:.03em}
+.meta .star{color:var(--ink);display:inline-flex;gap:3px;align-items:center}
 
 /* rows */
 .rows{display:flex;flex-direction:column}
-.row-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);text-align:left;width:100%;cursor:pointer}
+.row-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--hair);text-align:left;width:100%;cursor:pointer}
 .row-item:last-child{border-bottom:0}
-.thumb{width:52px;height:52px;border-radius:14px;flex:none;display:grid;place-items:center;font-size:26px;position:relative;overflow:hidden}
 .row-item .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
-.row-item .t1{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.row-item .t1 span{font-weight:500;color:var(--muted)}
+.row-item .t1{font-weight:700;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row-item .t1 span{font-weight:400;color:var(--ink-2)}
 .row-item .t2{display:flex;gap:8px;align-items:center;min-width:0}
-.row-item .arrow{color:var(--muted)}
 
 /* map */
-.map{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--map-land)}
-.map.mini{height:184px}
-.map.full{position:absolute;inset:0;border-radius:0;border:0}
+.map{position:relative;overflow:hidden;border:1px solid var(--ink);border-radius:2px;background:var(--wash)}
+.map.mini{height:188px}
+.map.full{position:absolute;inset:0;border:0;border-radius:0}
 .map svg.base{position:absolute;inset:0;width:100%;height:100%}
-.map .lbl{position:absolute;transform:translate(-50%,-50%);font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--map-label);text-transform:uppercase;pointer-events:none;white-space:nowrap}
-.map .lbl.water{color:var(--map-label);font-style:italic;letter-spacing:.06em;text-transform:none;font-weight:600}
-.pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;z-index:2}
-.pin .head{min-width:30px;height:30px;padding:0 7px;border-radius:15px;background:var(--pc);color:#fff;display:grid;place-items:center;font-size:15px;box-shadow:0 2px 6px rgba(0,0,0,.25);border:2px solid #fff}
-.pin .tail{width:2px;height:7px;background:var(--pc)}
-.pin.sel{z-index:4}
-.pin.sel .head{transform:scale(1.2);background:var(--fg);}
-.map.full .pin .head{height:34px;border-radius:17px;font-size:12px;font-weight:700;gap:4px;display:flex;align-items:center;white-space:nowrap}
-.me{position:absolute;width:18px;height:18px;transform:translate(-50%,-50%);border-radius:50%;background:#2F7BF6;border:3px solid #fff;box-shadow:0 0 0 7px rgba(47,123,246,.22);z-index:1}
-.map .expand{position:absolute;top:10px;right:10px;z-index:3;width:36px;height:36px;border-radius:12px;background:var(--card);display:grid;place-items:center;box-shadow:var(--shadow)}
-.map .pop{position:absolute;left:10px;right:10px;bottom:10px;z-index:5;background:var(--card);border-radius:16px;padding:10px;display:flex;gap:10px;align-items:center;box-shadow:var(--shadow);cursor:pointer;text-align:left}
-.map.full .pop{left:16px;right:16px;bottom:16px;padding:12px}
-.map .pop .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.map .lbl{position:absolute;transform:translate(-50%,-50%);font-family:var(--f-mono);font-size:9.5px;font-weight:500;letter-spacing:.14em;color:var(--ink-2);text-transform:uppercase;pointer-events:none;white-space:nowrap;background:var(--wash);padding:0 3px}
+.map .lbl.water{background:none;font-style:italic;letter-spacing:.08em;text-transform:none}
+.pin{position:absolute;transform:translate(-50%,-50%);z-index:2;display:grid;place-items:center;width:28px;height:28px}
+.pin .dot{width:12px;height:12px;background:var(--ink);border:2px solid var(--paper);outline:1px solid var(--ink)}
+.pin .flagl{display:none}
+.pin.sel{z-index:4;width:auto;height:auto;transform:translate(-50%,-100%)}
+.pin.sel .dot{display:none}
+.pin.sel .flagl{display:flex;flex-direction:column;align-items:center}
+.pin.sel .flagl span{background:var(--ink);color:var(--paper);font-family:var(--f-mono);font-size:11px;font-weight:600;padding:5px 7px;white-space:nowrap;text-transform:uppercase;letter-spacing:.04em}
+.pin.sel .flagl i{width:1px;height:10px;background:var(--ink)}
+.me{position:absolute;width:16px;height:16px;transform:translate(-50%,-50%);border-radius:50%;background:var(--paper);border:4px solid var(--ink);z-index:1}
+.me::after{content:"";position:absolute;inset:-9px;border:1px solid var(--ink);border-radius:50%}
+.map .expand{position:absolute;top:8px;right:8px;z-index:3;width:34px;height:34px;background:var(--paper);border:1px solid var(--ink);border-radius:2px;display:grid;place-items:center}
+.map .pop{position:absolute;left:8px;right:8px;bottom:8px;z-index:5;background:var(--paper);border:1px solid var(--ink);border-radius:2px;padding:10px;display:flex;gap:10px;align-items:center;cursor:pointer;text-align:left}
+.map.full .pop{left:14px;right:14px;bottom:14px;padding:12px}
+.map .pop .thumb{width:44px;height:44px}
+.map .pop .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
 .map .pop .t1{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .map-top{position:absolute;top:12px;left:12px;right:12px;z-index:6;display:flex;gap:8px;flex-direction:column}
-.map-top .bar{display:flex;gap:8px;align-items:center}
-.map-top .back-fab{width:44px;height:44px;border-radius:50%;background:var(--card);display:grid;place-items:center;box-shadow:var(--shadow);flex:none}
+.map-top .bar{display:flex;gap:8px;align-items:stretch}
+.map-top .back-fab{width:44px;height:44px;background:var(--paper);border:1px solid var(--ink);border-radius:2px;display:grid;place-items:center;flex:none}
 .map-top .chips{margin:0;padding:0}
-.map-top .chip{box-shadow:var(--shadow);border-color:transparent}
-.map-top .chip.on{border-color:var(--fg)}
-.map-top .count{background:var(--card);box-shadow:var(--shadow);border-radius:999px;padding:0 14px;height:44px;display:flex;align-items:center;font-weight:600;font-size:14px;flex:1}
+.map-top .count{background:var(--paper);border:1px solid var(--ink);border-radius:2px;padding:0 12px;display:flex;align-items:center;font-family:var(--f-mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;flex:1;min-width:0}
 
 /* deals */
-.subbar{flex:none;padding:12px 20px 10px;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--line)}
-.summary{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)}
-.summary button{display:inline-flex;gap:4px;align-items:center;color:var(--fg);font-weight:600}
-.empty{padding:48px 12px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;color:var(--muted)}
-.empty h3{color:var(--fg);font-size:18px}
-.empty .big{font-size:40px}
+.subbar{flex:none;padding:12px 20px 0;display:flex;flex-direction:column;gap:10px}
+.summary{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2);border-bottom:1px solid var(--ink);padding-bottom:8px}
+.summary button{display:inline-flex;gap:5px;align-items:center;color:var(--ink);font-weight:600;letter-spacing:.06em}
+.empty{padding:44px 0;display:flex;flex-direction:column;gap:10px;align-items:flex-start;color:var(--ink-2)}
+.empty h3{color:var(--ink);font-size:22px;font-weight:800;font-stretch:75%}
 
 /* saved */
-.acc{border:1.5px solid var(--line);border-radius:18px;background:var(--card);overflow:hidden}
-.acc-h{display:flex;align-items:center;gap:10px;padding:16px 16px;width:100%;text-align:left}
-.acc-h h3{font-size:16.5px;font-family:var(--f-body);font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.acc-h .count{background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:700;border-radius:999px;padding:2px 8px}
+.acc{border-top:1px solid var(--ink)}
+.acc:last-of-type{border-bottom:1px solid var(--ink)}
+.acc-h{display:flex;align-items:center;gap:10px;padding:16px 0;width:100%;text-align:left}
+.acc-h h3{font-size:19px;font-weight:800;font-stretch:78%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acc-h .count{font-family:var(--f-mono);font-size:12px;color:var(--ink-2)}
 .acc-h .sp{flex:1}
-.acc-h .chev{transition:transform .2s;color:var(--muted)}
+.acc-h .chev{transition:transform .2s}
 .acc.open .acc-h .chev{transform:rotate(180deg)}
-.acc-b{border-top:1px solid var(--line)}
-.acc-b .row-item{padding:12px 16px;background:var(--surface)}
-.acc-b .row-item .thumb{width:44px;height:44px;font-size:22px;border-radius:12px}
-.acc-foot{display:flex;gap:16px;padding:10px 16px;border-top:1px solid var(--line)}
-.acc-foot button{font-size:13px;font-weight:600;color:var(--accent)}
-.acc-foot button.del{color:var(--danger);margin-left:auto}
-.rm{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:var(--danger);background:var(--card);border:1.5px solid var(--line)}
-.saved-intro{color:var(--muted);font-size:14px}
+.acc-b{padding-bottom:6px}
+.acc-b .row-item{padding:10px 0}
+.acc-b .row-item .thumb{width:44px;height:44px}
+.acc-foot{display:flex;gap:18px;padding:10px 0 14px}
+.acc-foot button{font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.acc-foot button.del{margin-left:auto;color:var(--ink-2)}
+.rm{width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--ink);border-radius:2px}
 
 /* place */
-.carousel{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line)}
-.car-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.carousel{position:relative;display:flex;border:1px solid var(--ink);border-radius:2px;overflow:hidden}
+.car-track{flex:1;min-width:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
 .car-track::-webkit-scrollbar{display:none}
-.slide{flex:0 0 100%;scroll-snap-align:start;height:210px}
-.slide .em{font-size:84px}
-.slide .cap{position:absolute;left:12px;top:12px;z-index:1;background:rgba(0,0,0,.45);color:#fff;font-size:12px;font-weight:600;padding:4px 9px;border-radius:999px}
-.car-next{position:absolute;right:0;top:0;bottom:0;width:64px;display:grid;place-items:center;z-index:2;color:#fff;background:linear-gradient(90deg,transparent,rgba(0,0,0,.28))}
-.car-next svg{filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))}
-.dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:2}
-.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.55)}
-.dots i.on{background:#fff;width:18px;border-radius:4px}
-.title-blk h2{font-size:26px;font-weight:800;line-height:1.12}
-.title-blk .sub{color:var(--muted);margin-top:4px;font-size:14px}
-.tags{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.tags .sticker{font-size:14px;padding:9px 12px 9px 19px}
-.tags .sticker::before{left:7px;width:6px;height:6px;margin-top:-3px}
-.info{display:flex;flex-direction:column;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:6px 0}
-.info-row{display:flex;gap:12px;padding:9px 0;align-items:flex-start}
-.info-row svg{color:var(--muted);margin-top:1px}
+.slide{flex:0 0 100%;scroll-snap-align:start;height:214px}
+.slide .mg{font-size:110px}
+.car-next{width:52px;flex:none;border-left:1px solid var(--ink);display:grid;place-items:center;background:var(--paper)}
+.car-count{position:absolute;left:10px;bottom:10px;z-index:2;font-family:var(--f-mono);font-size:11px;background:var(--ink);color:var(--paper);padding:3px 6px}
+.title-blk h2{font-size:34px;font-weight:800;font-stretch:70%;line-height:.98;letter-spacing:-.005em}
+.title-blk .sub{color:var(--ink-2);margin-top:6px;font-size:14px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.info{display:flex;flex-direction:column;border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
+.info-row{display:flex;gap:12px;padding:11px 0;align-items:flex-start}
+.info-row + .info-row{border-top:1px solid var(--hair)}
 .info-row .v{display:flex;flex-direction:column;gap:5px;min-width:0}
-.info-row .v .s{color:var(--muted);font-size:13px;display:flex;gap:5px;align-items:center;flex-wrap:wrap}
-.open{color:var(--good);font-weight:600}
-.stats{border:1.5px solid var(--line);border-radius:18px;background:var(--card);padding:6px 16px}
-.stats .r{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.info-row .v .s{color:var(--ink-2);font-size:13px;display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+.stats{border:1px solid var(--ink);border-radius:2px;padding:2px 14px}
+.stats .r{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px dashed var(--hair)}
 .stats .r:last-child{border-bottom:0}
-.stats .r b{font-variant-numeric:tabular-nums}
-.stats .r .k{color:var(--muted)}
-.basis{font-size:13px;color:var(--muted);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.basis svg{color:var(--good)}
-.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.act{height:48px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center;gap:7px}
-.act.on{color:var(--accent);border-color:var(--accent)}
-.price-list{display:flex;flex-direction:column;border:1.5px solid var(--line);border-radius:18px;background:var(--card);padding:4px 16px}
-.price-list .r{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line)}
-.price-list .r:last-child{border-bottom:0}
-.price-list s{color:var(--muted);font-size:13px;margin-right:6px}
-.price-list b{font-variant-numeric:tabular-nums}
-.verified{font-size:12.5px;color:var(--muted);display:flex;gap:6px;align-items:center;margin-top:8px}
-.tip{background:var(--accent-soft);border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
-.tip q{font-size:15px;quotes:"“" "”"}
-.tip .who{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:5px}
-.prose{color:var(--fg);font-size:15px;max-width:62ch}
-.terms{font-size:13.5px;color:var(--muted);display:flex;flex-direction:column;gap:4px;padding-left:18px;margin:0}
-.bottom-cta{flex:none;display:flex;gap:10px;padding:12px 20px;border-top:1px solid var(--line);background:var(--surface)}
+.stats .r b{font-family:var(--f-mono);font-weight:600}
+.stats .r .k{color:var(--ink-2)}
+.basis{font-size:13px;color:var(--ink-2);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.actions{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--ink);border-radius:2px}
+.act{height:48px;font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center;gap:7px}
+.act + .act{border-left:1px solid var(--ink)}
+.act.on{background:var(--ink);color:var(--paper)}
+.receipt-list{font-family:var(--f-mono);font-size:13.5px}
+.receipt-list .r{display:flex;align-items:baseline;gap:8px;padding:7px 0}
+.receipt-list .r .n{font-family:var(--f-sans);font-size:15px}
+.receipt-list .r .lead{flex:1;border-bottom:1px dotted var(--ink-2);transform:translateY(-4px);min-width:16px}
+.receipt-list s{color:var(--ink-2);margin-right:6px}
+.verified{font-size:12.5px;color:var(--ink-2);display:flex;gap:6px;align-items:center;margin-top:8px}
+.tip{border-left:3px solid var(--ink);padding:2px 0 2px 14px;display:flex;flex-direction:column;gap:6px}
+.tip q{font-size:17px;font-weight:500;line-height:1.35;quotes:"“" "”"}
+.tip .who{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+.prose{font-size:15px;max-width:62ch}
+.terms{font-size:14px;color:var(--ink-2);display:flex;flex-direction:column;gap:4px;padding-left:18px;margin:0}
+.bottom-cta{flex:none;display:flex;gap:8px;padding:12px 20px;border-top:1px solid var(--ink);background:var(--paper)}
 .bottom-cta .btn.outline{width:auto;flex:none;padding:0 16px}
+.bottom-cta .btn.outline.on{background:var(--ink);color:var(--paper)}
 .bottom-cta .btn.primary{flex:1}
-.bottom-cta .btn.outline.on{color:var(--accent);border-color:var(--accent)}
 
 /* redeem */
-.redeem{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:12px 24px 24px;overflow-y:auto}
-.redeem h2{font-size:24px;font-weight:800}
-.qr-plate{background:var(--qr-bg);border-radius:22px;padding:16px;box-shadow:var(--shadow);border:1px solid var(--line)}
-.qr-plate svg{width:190px;height:190px;display:block;color:var(--qr-fg)}
-.code{font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;font-size:22px;font-weight:700;letter-spacing:.14em}
-.timer{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
-.timer b{color:var(--fg)}
-.verified-id{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:16px;padding:10px 14px;width:100%;text-align:left;background:var(--card)}
-.verified-id .ok{width:34px;height:34px;border-radius:50%;background:var(--good-soft);color:var(--good);display:grid;place-items:center;flex:none}
-.receipt{width:100%;background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:14px 16px;text-align:left;font-variant-numeric:tabular-nums}
-.receipt .r{display:flex;justify-content:space-between;padding:5px 0}
-.receipt .r.tot{border-top:1.5px dashed var(--line);margin-top:6px;padding-top:10px;font-weight:700}
-.receipt .r.disc{color:var(--good);font-weight:600}
-.big-check{width:76px;height:76px;border-radius:50%;background:var(--good-soft);color:var(--good);display:grid;place-items:center;animation:pop .4s cubic-bezier(.2,1.4,.4,1)}
-@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
-.stars{display:flex;gap:6px;justify-content:center}
-.stars button{color:var(--line);padding:2px}
-.stars button.on{color:#F2A900}
+.redeem{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:14px 24px 24px;overflow-y:auto}
+.redeem h2{font-size:30px;font-weight:800;font-stretch:70%;line-height:1}
+.qr-plate{background:var(--qr-bg);padding:14px;border:1px solid var(--ink)}
+.qr-plate svg{width:184px;height:184px;display:block;color:var(--qr-fg)}
+.code{font-family:var(--f-mono);font-size:22px;font-weight:600;letter-spacing:.16em}
+.timer{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+.timer b{color:var(--ink)}
+.verified-id{display:flex;gap:10px;align-items:center;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:12px 0;width:100%;text-align:left}
+.verified-id .ok{width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex:none}
+.receipt{width:100%;border:1px solid var(--ink);padding:14px 16px;text-align:left;font-family:var(--f-mono);font-size:13.5px;background:var(--paper)}
+.receipt .head{text-align:center;font-weight:600;text-transform:uppercase;letter-spacing:.1em;padding-bottom:10px;border-bottom:1px dashed var(--ink);margin-bottom:6px}
+.receipt .r{display:flex;justify-content:space-between;padding:4px 0}
+.receipt .r.tot{border-top:1px dashed var(--ink);margin-top:6px;padding-top:10px;font-weight:600}
+.big-check{width:68px;height:68px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex:none;animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:none;opacity:1}}
+.saved-sem{width:100%;display:flex;justify-content:space-between;align-items:baseline;background:var(--ink);color:var(--paper);padding:12px 14px}
+.saved-sem span{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.saved-sem b{font-family:var(--f-mono);font-size:20px}
+.stars{display:flex;gap:4px;justify-content:center}
+.stars button{padding:3px;color:var(--ink)}
+.stars button.on svg{fill:currentColor}
 
 /* profile */
 .prof-card{display:flex;gap:14px;align-items:center}
-.prof-card .avatar{width:64px;height:64px;font-size:24px}
-.prof-card h2{font-size:22px}
-.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stat{border:1.5px solid var(--line);background:var(--card);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:2px}
-.stat b{font-family:var(--f-display);font-size:21px;font-variant-numeric:tabular-nums}
-.stat span{font-size:12px;color:var(--muted)}
-.stat.hl{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.stat.hl span{color:var(--accent-ink);opacity:.8}
-.list-card{border:1.5px solid var(--line);background:var(--card);border-radius:18px;padding:0 16px}
-.set-row{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);width:100%;text-align:left}
-.set-row:last-child{border-bottom:0}
+.prof-card .avatar{width:62px;height:62px;font-size:26px}
+.prof-card h2{font-size:28px;font-weight:800;font-stretch:72%;line-height:1}
+.stat-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;border:1px solid var(--ink);border-radius:2px}
+.stat{padding:12px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.stat + .stat{border-left:1px solid var(--ink)}
+.stat b{font-family:var(--f-mono);font-size:20px;font-weight:600}
+.stat span{font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
+.stat.hl{background:var(--ink);color:var(--paper)}
+.stat.hl span{color:var(--paper);opacity:.75}
+.set-row{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--hair);width:100%;text-align:left}
 .set-row .txt{flex:1;min-width:0}
-.set-row .txt small{display:block;color:var(--muted);font-size:12.5px}
-.switch{width:46px;height:28px;border-radius:14px;background:var(--line);position:relative;flex:none;transition:background .2s}
-.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
-.switch.on{background:var(--accent)}
-.switch.on::after{transform:translateX(18px)}
-.label-sm{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin-bottom:8px}
+.set-row .txt small{display:block;color:var(--ink-2);font-size:12.5px}
+.switch{width:44px;height:26px;border-radius:13px;border:1px solid var(--ink);position:relative;flex:none;background:var(--paper);transition:background .2s}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--ink);transition:transform .2s,background .2s}
+.switch.on{background:var(--ink)}
+.switch.on::after{transform:translateX(18px);background:var(--paper)}
 
 /* notifications */
-.notif{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);text-align:left;width:100%;cursor:pointer}
+.notif{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--hair);text-align:left;width:100%;cursor:pointer}
 .notif .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
-.notif .txt small{color:var(--muted);font-size:12px}
-.notif.unread .t1::after{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-left:6px;vertical-align:middle}
+.notif .txt small{font-family:var(--f-mono);font-size:11px;color:var(--ink-2);text-transform:uppercase}
+.notif.unread .t1::before{content:"";display:inline-block;width:7px;height:7px;background:var(--ink);margin-right:7px;vertical-align:middle}
 
 /* search */
-.search-top{flex:none;display:flex;gap:10px;align-items:center;padding:10px 20px;border-bottom:1px solid var(--line)}
+.search-top{flex:none;display:flex;gap:12px;align-items:center;padding:10px 20px;border-bottom:1px solid var(--ink)}
 .search-top .search-field{padding-right:12px}
 .search-top input{flex:1;min-width:0;border:0;background:transparent;height:100%;font-size:16px;margin-left:10px}
 .search-top input:focus{outline:none}
-.search-top .cancel{color:var(--accent);font-weight:600}
-.sug{display:flex;gap:12px;align-items:center;padding:12px 0;width:100%;text-align:left;border-bottom:1px solid var(--line)}
-.sug svg{color:var(--muted)}
+.search-top .cancel{font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.sug{display:flex;gap:12px;align-items:center;padding:12px 0;width:100%;text-align:left;border-bottom:1px solid var(--hair)}
+.sug svg{color:var(--ink-2)}
 
 /* onboarding */
-.onb{flex:1;display:flex;flex-direction:column;padding:20px 24px 28px;gap:18px;overflow-y:auto}
+.onb{flex:1;display:flex;flex-direction:column;padding:18px 24px 26px;gap:18px;overflow-y:auto}
 .onb .grow{flex:1}
-.onb h1{font-size:30px;font-weight:800;line-height:1.08}
-.onb .lead{color:var(--muted);font-size:16px}
-.progress{display:flex;gap:6px}
-.progress i{height:4px;flex:1;border-radius:2px;background:var(--line)}
-.progress i.on{background:var(--accent)}
-.welcome-art{position:relative;height:300px;border-radius:28px;background:var(--accent);overflow:hidden;color:var(--accent-ink)}
-.welcome-art .wm{position:absolute;left:22px;bottom:20px;font-family:var(--f-display);font-weight:800;font-size:58px;letter-spacing:-.03em;line-height:.9}
-.welcome-art .wm small{display:block;font-size:15px;font-family:var(--f-body);font-weight:500;letter-spacing:0;margin-top:10px;opacity:.85}
-.welcome-art .tg{position:absolute;transform:rotate(var(--r))}
-.code-input{letter-spacing:.6em;text-align:center;font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;height:64px}
-.perm{border:1.5px solid var(--line);border-radius:22px;padding:20px;background:var(--card);display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
-.perm .ico{width:64px;height:64px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
-.opt-grid{display:flex;flex-wrap:wrap;gap:8px}
+.onb h1{font-size:38px;font-weight:800;font-stretch:68%;line-height:.95;letter-spacing:-.005em}
+.onb .lead{color:var(--ink-2);font-size:16px}
+.progress{display:flex;gap:4px}
+.progress i{height:3px;flex:1;background:var(--hair)}
+.progress i.on{background:var(--ink)}
+.wordmark{font-weight:800;font-stretch:62%;font-size:96px;line-height:.8;letter-spacing:-.02em;text-transform:uppercase;margin-top:8px}
+.wordmark-sub{font-family:var(--f-mono);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-2);margin-top:10px}
+.welcome-receipt{border-top:1px dashed var(--ink);border-bottom:1px dashed var(--ink);padding:10px 0;font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase}
+.welcome-receipt .r{display:flex;gap:8px;align-items:baseline;padding:3px 0}
+.welcome-receipt .r .lead{flex:1;border-bottom:1px dotted var(--ink-2);transform:translateY(-3px)}
+.welcome-receipt .r.tot{font-weight:600;border-top:1px solid var(--ink);margin-top:6px;padding-top:8px}
+.code-input{letter-spacing:.6em;text-align:center;font-family:var(--f-mono);font-size:26px;font-weight:600;height:64px}
+.perm{border:1px solid var(--ink);padding:18px;display:flex;flex-direction:column;gap:8px}
+.perm b{font-size:17px}
+.opt-grid{display:flex;flex-wrap:wrap;gap:6px}
 
 /* layers */
 .sheet-layer{position:absolute;inset:0;z-index:40}
 .scrim{position:absolute;inset:0;background:var(--scrim);opacity:0;transition:opacity .2s}
-.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-radius:26px 26px 0 0;max-height:88%;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom,0px)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--paper);border-radius:14px 14px 0 0;max-height:88%;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom,0px)}
 .sheet-layer.open .scrim{opacity:1}
 .sheet-layer.open .sheet{transform:none}
-.grab{width:40px;height:5px;border-radius:3px;background:var(--line);margin:8px auto 0;flex:none}
-.sheet-h{display:flex;align-items:center;justify-content:space-between;padding:10px 20px 6px;flex:none}
-.sheet-h h3{font-size:20px;font-weight:700}
-.sheet-b{padding:8px 20px 20px;overflow-y:auto;display:flex;flex-direction:column;gap:18px}
-.sheet-f{flex:none;padding:12px 20px 18px;border-top:1px solid var(--line);display:flex;gap:10px}
-.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:14px;padding:3px;gap:3px;background:var(--card)}
-.seg button{height:38px;border-radius:11px;font-weight:600;font-size:13.5px;color:var(--muted)}
-.seg button.on{background:var(--fg);color:var(--surface)}
-.check-row{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);width:100%;text-align:left}
+.grab{width:36px;height:4px;border-radius:2px;background:var(--hair);margin:8px auto 0;flex:none}
+.sheet-h{display:flex;align-items:center;justify-content:space-between;padding:8px 0 10px;flex:none;border-bottom:1px solid var(--ink);margin:0 20px}
+.sheet-h h3{font-size:24px;font-weight:800;font-stretch:72%;line-height:1}
+.sheet-b{padding:16px 20px 20px;overflow-y:auto;display:flex;flex-direction:column;gap:20px}
+.sheet-f{flex:none;padding:12px 20px 18px;border-top:1px solid var(--hair);display:flex;gap:8px}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1px solid var(--ink);border-radius:4px;overflow:hidden}
+.seg button{height:38px;font-weight:600;font-size:13.5px;text-align:center}
+.seg button + button{border-left:1px solid var(--ink)}
+.seg button.on{background:var(--ink);color:var(--paper)}
+.check-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--hair);width:100%;text-align:left}
 .check-row:last-child{border-bottom:0}
-.box{width:24px;height:24px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;flex:none;color:var(--accent-ink)}
-.box.on{background:var(--accent);border-color:var(--accent)}
-.radio{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:none;position:relative}
-.radio.on{border-color:var(--accent)}
-.radio.on::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--accent)}
-.share-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.share-t{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:600}
-.share-t .c{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:24px;background:var(--card);border:1.5px solid var(--line)}
+.box{width:22px;height:22px;border:1px solid var(--ink);border-radius:2px;display:grid;place-items:center;flex:none}
+.box.on{background:var(--ink);color:var(--paper)}
+.radio{width:20px;height:20px;border-radius:50%;border:1px solid var(--ink);flex:none;position:relative}
+.radio.on::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--ink)}
+.share-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--ink);border-radius:2px}
+.share-t{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:14px 0;text-align:center}
+.share-t + .share-t{border-left:1px solid var(--ink)}
 .copy-row{display:flex;gap:8px}
-.copy-row .input{font-size:14px;color:var(--muted)}
-.copy-row .btn{width:auto;flex:none;height:52px}
-.qtags{display:flex;flex-wrap:wrap;gap:8px}
+.copy-row .input{font-family:var(--f-mono);font-size:13px;color:var(--ink-2)}
+.copy-row .btn{width:auto;flex:none}
+.qtags{display:flex;flex-wrap:wrap;gap:6px}
 textarea.input{height:84px;padding:12px 14px;resize:none}
 
-.toast{position:absolute;left:50%;bottom:96px;transform:translate(-50%,12px);background:var(--fg);color:var(--surface);padding:11px 16px;border-radius:14px;font-weight:600;font-size:14px;z-index:60;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;max-width:calc(100% - 40px);text-align:center;display:flex;gap:8px;align-items:center}
+.toast{position:absolute;left:50%;bottom:92px;transform:translate(-50%,10px);background:var(--ink);color:var(--paper);padding:11px 14px;border-radius:4px;font-weight:600;font-size:14px;z-index:60;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;max-width:calc(100% - 40px);display:flex;gap:8px;align-items:center;white-space:nowrap}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-.push{position:absolute;left:10px;right:10px;top:8px;z-index:70;background:var(--card);border-radius:22px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 12px 40px rgba(0,0,0,.25);transform:translateY(-130%);transition:transform .35s cubic-bezier(.2,.8,.2,1);text-align:left;width:auto;border:1px solid var(--line)}
-.push.show{transform:none}
-.push .app-ico{width:38px;height:38px;border-radius:10px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:19px;flex:none}
-.push .txt{flex:1;min-width:0;font-size:14px}
-.push .txt .h{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:2px}
-.push .txt b{display:block}
+.pushnote{position:absolute;left:10px;right:10px;top:8px;z-index:70;background:var(--paper);border:1px solid var(--ink);border-radius:16px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;transform:translateY(-140%);transition:transform .35s cubic-bezier(.2,.8,.2,1);text-align:left}
+.pushnote.show{transform:none}
+.pushnote .app-ico{width:36px;height:36px;border-radius:9px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-weight:800;font-stretch:62%;font-size:22px;flex:none}
+.pushnote .txt{flex:1;min-width:0;font-size:14px}
+.pushnote .txt .h{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2);margin-bottom:3px}
+.pushnote .txt b{display:block}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -401,10 +385,10 @@ textarea.input{height:84px;padding:12px 14px;resize:none}
   <aside class="side" aria-label="Prototype guide">
     <div>
       <div class="brand">Corner</div>
-      <p style="margin-top:8px">Hi-fi prototype · student deals around NYU Tandon and Downtown Brooklyn. Everything on the phone is clickable.</p>
+      <p style="margin-top:12px">Hi-fi prototype of a student deals app for NYU Tandon and Downtown Brooklyn. Everything on the phone is clickable.</p>
     </div>
-    <details id="tasks">
-      <summary>Usability test tasks</summary>
+    <div>
+      <span class="lbl">Usability test tasks</span>
       <ol>
         <li>Find a lunch deal within a 5-minute walk and save it to “Cheap lunches”.<span class="persona">Ankur · pragmatist</span></li>
         <li>Find a thrift store in Dumbo and check its prices before you go.<span class="persona">Dani · artisan</span></li>
@@ -412,21 +396,21 @@ textarea.input{height:84px;padding:12px 14px;resize:none}
         <li>Find a halal or vegan option using filters.</li>
         <li>Start a new saved list called “Study spots” and add a café to it.</li>
       </ol>
-    </details>
+    </div>
     <div>
-      <h3 style="margin-bottom:10px">Facilitator</h3>
-      <div class="row">
-        <button class="btn outline" style="width:auto;height:42px;font-size:14px" data-act="resetAll">Restart from onboarding</button>
-        <button class="btn outline" style="width:auto;height:42px;font-size:14px" data-act="skipOnb">Skip to app</button>
-        <button class="btn outline" style="width:auto;height:42px;font-size:14px" data-act="demoPush">Send nearby-deal alert</button>
+      <span class="lbl">Facilitator</span>
+      <div class="fac">
+        <button data-act="resetAll">Restart from onboarding <span aria-hidden="true">→</span></button>
+        <button data-act="skipOnb">Skip to app <span aria-hidden="true">→</span></button>
+        <button data-act="demoPush">Send nearby-deal alert <span aria-hidden="true">→</span></button>
       </div>
     </div>
-    <p style="font-size:12.5px">Prototype limits: no real payments, maps or location. Codes, sharing and notifications are simulated. Progress is kept in this browser until you restart.</p>
+    <p style="font-size:12.5px">Not real: payments, maps, location, sharing and notifications are simulated. Progress stays in this browser until you restart.</p>
   </aside>
 
   <div class="device">
     <div class="app" id="app">
-      <div class="status" aria-hidden="true"><span class="num">9:41</span><span class="notch"></span><span class="sys">
+      <div class="status" aria-hidden="true"><span class="mono">9:41</span><span class="notch"></span><span class="sys">
         <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"/><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="currentColor"/><rect x="10" y="3" width="3" height="9" rx="1" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg>
         <svg width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><rect x="24" y="4" width="1.5" height="4" rx=".7" fill="currentColor" opacity=".5"/></svg>
       </span></div>
@@ -434,7 +418,7 @@ textarea.input{height:84px;padding:12px 14px;resize:none}
       <nav class="tabbar" id="tabbar" aria-label="Main"></nav>
       <div class="sheet-layer" id="sheet" hidden></div>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
-      <button class="push" id="push" data-act="pushOpen" aria-live="polite"></button>
+      <button class="pushnote" id="push" data-act="pushOpen" aria-live="polite"></button>
     </div>
   </div>
 </div>
@@ -443,7 +427,7 @@ textarea.input{height:84px;padding:12px 14px;resize:none}
 (function(){
 "use strict";
 const APP = "Corner";
-const KEY = "corner-proto-v1";
+const KEY = "corner-proto-v2";
 
 /* ---------------- Icons ---------------- */
 const IC = {
@@ -456,7 +440,7 @@ const IC = {
   arrowR:'<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>',
   chevR:'<polyline points="9 18 15 12 9 6"/>', chevL:'<polyline points="15 18 9 12 15 6"/>', chevD:'<polyline points="6 9 12 15 18 9"/>',
   clock:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
-  share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>',
+  share:'<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/>',
   star:'<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
   sliders:'<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>',
   x:'<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
@@ -468,40 +452,41 @@ const IC = {
   shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>',
   sort:'<line x1="4" y1="6" x2="14" y2="6"/><line x1="4" y1="12" x2="11" y2="12"/><line x1="4" y1="18" x2="8" y2="18"/><polyline points="17 15 20 18 23 15"/><line x1="20" y1="6" x2="20" y2="18"/>',
   history:'<polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>',
-  user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
   mail:'<path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22 6 12 13 2 6"/>',
-  edit:'<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>',
+  msg:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  phone:'<rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>',
+  camera:'<rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>',
   locate:'<circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><circle cx="12" cy="12" r="7"/>'
 };
-function ic(n,s,fill){ s=s||22; return `<svg class="i" width="${s}" height="${s}" viewBox="0 0 24 24" fill="${fill?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`; }
+function ic(n,s,fill){ s=s||22; return `<svg class="i" width="${s}" height="${s}" viewBox="0 0 24 24" fill="${fill?'currentColor':'none'}" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`; }
 
 /* ---------------- Data ---------------- */
-const LINE_COLORS = {A:'#0039A6',C:'#0039A6',E:'#0039A6',B:'#FF6319',D:'#FF6319',F:'#FF6319',M:'#FF6319',N:'#FCCC0A',Q:'#FCCC0A',R:'#FCCC0A',W:'#FCCC0A','2':'#EE352E','3':'#EE352E','4':'#00933C','5':'#00933C',G:'#6CBE45'};
-const CATS = [{id:'food',label:'Food',em:'🍔'},{id:'groceries',label:'Groceries',em:'🥦'},{id:'clothes',label:'Clothes',em:'👕'}];
+const CATS = [{id:'food',label:'Food'},{id:'groceries',label:'Groceries'},{id:'clothes',label:'Clothes'}];
 const PLACES = [
- {id:'dailybite',name:'The Daily Bite',cat:'food',kind:'Italian · Pizza & pasta',area:'Downtown BK',deal:'20% off',dealLong:'20% off your whole order',terms:['Show your code before paying','Dine-in or takeout','Not valid with other promotions'],ends:'Ongoing',dist:0.2,walk:4,rating:4.8,sub:['Food',4.7],value:4.6,count:212,range:'$8–$16',level:2,diet:['vegan'],vibe:['sit'],hours:'Open · until 10 PM',addr:'Willoughby St & Lawrence St',lines:['A','C','F','R'],station:'Jay St–MetroTech',about:'Wood-fired pizza and fresh pasta a block from MetroTech. Big tables, good for groups after class.',items:[['Margherita pizza',13.5,10.8],['Pasta pomodoro',6.5,5.2],['Garlic knots (6)',4.0,3.2]],verified:'2 days ago',tip:'Go before 12:30 on weekdays. After that the line is out the door.',saving:4.0,x:56,y:58,photos:[['🍕','#F3B48B','Storefront'],['🍝','#F6D28B','Pasta pomodoro'],['🪑','#C9B8E8','Inside']]},
- {id:'charlies',name:"Charlie's Pizzeria",cat:'food',kind:'Pizza by the slice',area:'Navy Yard',deal:'$2 slices',dealLong:'$2 cheese slices, $5 lunch combo',terms:['Weekdays 11 AM–4 PM','Combo is 2 slices + a soda','Limit 4 slices per code'],ends:'Ends Fri, Nov 27',dist:0.6,walk:12,rating:4.4,sub:['Food',4.3],value:4.9,count:96,range:'$2–$9',level:1,diet:[],vibe:['quick'],hours:'Open · until 11 PM',addr:'Flushing Ave & Navy St',lines:[],bus:'B57 · B62',station:'Navy Yard bus stop',about:'Classic New York slice counter by the Navy Yard gate. Standing room and two stools.',items:[['Cheese slice',3.5,2.0],['Lunch combo',8.0,5.0],['Pepperoni slice',4.25,3.0]],verified:'yesterday',tip:'The $5 combo is the best lunch deal on this side of Flatbush.',saving:3.0,x:82,y:30,photos:[['🍕','#F2A97E','Slice counter'],['🥤','#A9D3F0','Lunch combo'],['🏭','#C7C2D6','Navy Yard gate']]},
- {id:'ediths',name:"Edith's Sandwich",cat:'food',kind:'Breakfast & sandwiches',area:'Downtown BK',deal:'$6 breakfast',dealLong:'$6 breakfast sandwiches, 20% off lunch',terms:['Breakfast deal 7–11 AM','20% off lunch after 11 AM','One code per visit'],ends:'Ongoing',dist:0.2,walk:4,rating:4.2,sub:['Food',4.2],value:4.5,count:128,range:'$6–$15',level:1,diet:[],vibe:['quick'],hours:'Open · until 4 PM',addr:'Lawrence St & Myrtle Ave',lines:['A','C','F','R'],station:'Jay St–MetroTech',about:'Egg-and-cheese on a fresh roll, bagels, and big deli sandwiches. Fast counter service.',items:[['Bacon, egg & cheese',8.0,6.0],['Turkey club',13.0,10.4],['Iced coffee',4.0,3.2]],verified:'3 days ago',tip:'Order ahead at 8:50 and it is ready when you walk past on the way to a 9 AM.',saving:2.0,x:44,y:61,photos:[['🥪','#EFC27F','Breakfast sandwich'],['🥯','#E8D3B0','Bagels'],['☕','#BFA58E','Counter']]},
- {id:'halal',name:'Fulton Halal Cart',cat:'food',kind:'Halal cart',area:'Fulton Mall',deal:'Free drink',dealLong:'Free drink with any platter',terms:['Show your code when ordering','Platters from $7'],ends:'Ongoing',dist:0.1,walk:2,rating:4.6,sub:['Food',4.6],value:4.8,count:174,range:'$7–$10',level:1,diet:['halal'],vibe:['quick'],hours:'Open · until 9 PM',addr:'Fulton St & Lawrence St',lines:['2','3','4','5','R'],station:'Borough Hall',about:'Chicken and lamb over rice with white sauce. The cart with the green umbrella.',items:[['Chicken over rice',8.0,8.0],['Lamb gyro platter',9.0,9.0],['Soda or water',1.5,0]],verified:'4 days ago',tip:'Ask for extra white sauce. Huge portions, easily two meals.',saving:1.5,x:50,y:68,photos:[['🍛','#E7B66B','Chicken over rice'],['🌯','#D9C08E','Gyro'],['☂️','#9BCF9E','The cart']]},
- {id:'greenbowl',name:'Green Bowl',cat:'food',kind:'Bowls & salads',area:'Boerum Hill',deal:'15% off',dealLong:'15% off any bowl',terms:['Valid all day','Add-ons not discounted'],ends:'Ends Sun, Nov 29',dist:0.5,walk:10,rating:4.5,sub:['Food',4.5],value:4.1,count:83,range:'$11–$15',level:2,diet:['vegan','gf'],vibe:['sit','study'],hours:'Open · until 8 PM',addr:'Smith St & Atlantic Ave',lines:['A','C','G'],station:'Hoyt–Schermerhorn',about:'Grain bowls, tofu, roasted veg. Everything is gluten-free except the pita.',items:[['Harvest bowl',14.0,11.9],['Spicy tofu bowl',13.0,11.05],['Matcha lemonade',5.0,4.25]],verified:'1 week ago',tip:'Quiet in the afternoon, outlets along the window. Good for studying.',saving:2.1,x:33,y:80,photos:[['🥗','#A8D5A2','Harvest bowl'],['🥑','#C8E3A0','Toppings bar'],['🪴','#B7D7C4','Window seats']]},
- {id:'happycafe',name:'Happy Cafe',cat:'food',kind:'Coffee & pastries',area:'Boerum Hill',deal:'$3 latte',dealLong:'$3 lattes before 10 AM',terms:['Before 10 AM, weekdays','Oat milk included'],ends:'Ongoing',dist:0.6,walk:12,rating:4.7,sub:['Coffee',4.8],value:4.4,count:141,range:'$3–$9',level:1,diet:['vegan'],vibe:['study'],hours:'Open · until 7 PM',addr:'Bergen St & Hoyt St',lines:['F','G'],station:'Bergen St',about:'Small neighborhood café with good espresso and a back garden.',items:[['Latte',5.5,3.0],['Almond croissant',4.5,4.5],['Drip coffee',3.0,2.5]],verified:'2 days ago',tip:'The back garden is open until it gets cold. Bring a jacket.',saving:2.5,x:26,y:87,photos:[['☕','#C9A27E','Latte'],['🥐','#EAC48A','Pastries'],['🌿','#A9CDA5','Garden']]},
- {id:'pourover',name:'Pour Over Bar',cat:'food',kind:'Specialty coffee',area:'Dumbo',deal:'Free pastry',dealLong:'Free pastry with any coffee after 2 PM',terms:['After 2 PM','While pastries last'],ends:'Ongoing',dist:0.5,walk:11,rating:4.6,sub:['Coffee',4.9],value:4.0,count:67,range:'$4–$8',level:2,diet:[],vibe:['study'],hours:'Open · until 6 PM',addr:'Front St & Jay St',lines:['F'],station:'York St',about:'Single-origin pour overs in an old warehouse with Manhattan Bridge views.',items:[['Pour over',6.0,6.0],['Cortado',4.5,4.5],['Pastry',4.0,0]],verified:'5 days ago',tip:'Get a window seat. The bridge view is worth the walk.',saving:4.0,x:36,y:18,photos:[['☕','#B48B6A','Pour over'],['🌉','#9FB6D6','Bridge view'],['🍪','#E2B98A','Pastries']]},
- {id:'brickbean',name:'Brick & Bean',cat:'food',kind:'Coffee',area:'Downtown BK',deal:'2-for-1',dealLong:'2-for-1 drip coffee',terms:['Bring a friend','All day'],ends:'Ends Wed, Nov 25',dist:0.15,walk:3,rating:4.3,sub:['Coffee',4.2],value:4.7,count:58,range:'$3–$7',level:1,diet:['vegan'],vibe:['quick'],hours:'Open · until 8 PM',addr:'Jay St & Willoughby St',lines:['A','C','F','R'],station:'Jay St–MetroTech',about:'Grab-and-go coffee window right across from the Tandon entrance.',items:[['Drip coffee (2)',6.0,3.0],['Cold brew',5.0,4.5],['Bagel & cream cheese',4.0,4.0]],verified:'today',tip:'Fastest coffee before a 9 AM class. Window opens at 7.',saving:3.0,x:58,y:47,photos:[['☕','#C59A7A','Coffee window'],['🧱','#D7957B','Brick wall'],['🥯','#E8CFA6','Bagels']]},
- {id:'fultonfresh',name:'Fulton Fresh Market',cat:'groceries',kind:'Grocery store',area:'Downtown BK',deal:'10% off Tue',dealLong:'10% off groceries every Tuesday',terms:['Tuesdays only','Excludes alcohol and lottery','Minimum $15'],ends:'Every Tuesday',dist:0.3,walk:6,rating:4.1,sub:['Selection',4.0],value:4.4,count:102,range:'$$',level:1,diet:['vegan','halal','gf'],vibe:['quick'],hours:'Open · until 11 PM',addr:'Fulton St & Bond St',lines:['2','3','4','5'],station:'Nevins St',about:'Full grocery store with a halal butcher, bulk rice and beans, and a big produce section.',items:[['Rice, 5 lb',7.99,7.19],['Eggs, dozen',4.49,4.04],['Chicken thighs, lb',3.99,3.59]],verified:'3 days ago',tip:'Tuesday + their own app coupons stack. Bulk aisle is the cheapest in the area.',saving:3.2,x:60,y:72,photos:[['🛒','#A9D4B0','Aisles'],['🥦','#B8DBA0','Produce'],['🍚','#E7DDC6','Bulk section']]},
- {id:'hoyt',name:'Hoyt St Produce',cat:'groceries',kind:'Fruit & veg stand',area:'Downtown BK',deal:'$1 bags',dealLong:'$1 fruit bags after 6 PM',terms:['After 6 PM','While stock lasts'],ends:'Ongoing',dist:0.4,walk:8,rating:4.4,sub:['Freshness',4.3],value:4.9,count:45,range:'$1–$5',level:1,diet:['vegan','halal','gf'],vibe:['quick'],hours:'Open · until 8 PM',addr:'Hoyt St & Livingston St',lines:['A','C','G'],station:'Hoyt–Schermerhorn',about:'Sidewalk produce stand. End-of-day bags are mixed fruit or veg.',items:[['Fruit bag',3.0,1.0],['Avocados (3)',4.0,4.0],['Bananas, bunch',1.5,1.5]],verified:'yesterday',tip:'The 6 PM veg bag covers a week of stir-fries.',saving:2.0,x:40,y:73,photos:[['🍎','#F0A49A','Fruit'],['🥬','#B5DA9A','Greens'],['🍌','#F4E08A','Bananas']]},
- {id:'secondstitch',name:'Second Stitch Vintage',cat:'clothes',kind:'Vintage & secondhand',area:'Dumbo',deal:'15% off',dealLong:'15% off everything with student ID',terms:['Not valid on consignment rack','In store only'],ends:'Ongoing',dist:0.6,walk:12,rating:4.7,sub:['Selection',4.8],value:4.3,count:89,range:'$12–$60',level:2,diet:[],vibe:['browse'],hours:'Open · until 7 PM',addr:'Water St & Main St',lines:['F'],station:'York St',about:'Curated vintage: 90s denim, workwear, leather jackets. Restocks Tuesday and Friday mornings.',items:[["Levi's 501s",null,'$18–$24'],['Carhartt jackets',null,'$35–$60'],['Band tees',null,'$12–$20']],verified:'4 days ago',tip:'Go Tuesday before noon. The denim rack is freshly restocked and nothing is picked over.',saving:5.0,x:24,y:24,photos:[['🧥','#D9A07A','Jacket rack'],['👖','#9EB4D6','Denim wall'],['🕶️','#C8B9D9','Accessories']]},
- {id:'rewear',name:'Re:Wear Dumbo',cat:'clothes',kind:'Thrift · fill-a-bag',area:'Dumbo',deal:'$20 bag',dealLong:'Fill a bag for $20 on Saturdays',terms:['Saturdays only','Bag provided at the door'],ends:'Every Saturday',dist:0.7,walk:14,rating:4.2,sub:['Selection',4.0],value:4.8,count:61,range:'$5–$20',level:1,diet:[],vibe:['browse'],hours:'Open · until 6 PM',addr:'Pearl St & Plymouth St',lines:['F'],station:'York St',about:'Big warehouse thrift. Bins by category, everything priced to move.',items:[['Fill-a-bag (Sat)',null,'$20'],['Jeans',null,'$8–$12'],['Sweaters',null,'$6–$10']],verified:'1 week ago',tip:'Saturday bag deal is great for resellers. Bring your own tote too.',saving:15.0,x:42,y:13,photos:[['👚','#E5A8B6','Bins'],['🧶','#C9B0E3','Knits'],['🛍️','#E8C38A','Fill-a-bag']]},
- {id:'jaythrift',name:'Jay St Thrift Co-op',cat:'clothes',kind:'Nonprofit thrift',area:'Downtown BK',deal:'$5 rack',dealLong:'Everything on the front rack is $5',terms:['Front rack only','Proceeds go to local shelters'],ends:'Ongoing',dist:0.3,walk:6,rating:4.0,sub:['Selection',3.8],value:4.7,count:38,range:'$3–$25',level:1,diet:[],vibe:['browse'],hours:'Open · until 7 PM',addr:'Jay St & Tillary St',lines:['A','C','F'],station:'High St',about:'Small nonprofit shop close to campus. Good for basics and last-minute costumes.',items:[['Front rack',null,'$5'],['Coats',null,'$15–$25'],['Shoes',null,'$8–$15']],verified:'5 days ago',tip:'They put out new stuff on the $5 rack every morning.',saving:4.0,x:47,y:36,photos:[['👕','#B9C9E6','Front rack'],['🧢','#E6C79A','Hats'],['👟','#C4D9B5','Shoes']]}
+ {id:'dailybite',name:'The Daily Bite',cat:'food',kind:'Pizza & pasta',area:'Downtown BK',deal:'20% off',dealLong:'20% off your whole order',terms:['Show your code before paying','Dine-in or takeout','Not valid with other promotions'],ends:'Ongoing',dist:0.2,walk:4,rating:4.8,sub:['Food',4.7],value:4.6,count:212,range:'$8–$16',level:2,diet:['vegan'],vibe:['sit'],hours:'Open · until 10 PM',addr:'Willoughby St & Lawrence St',lines:['A','C','F','R'],station:'Jay St–MetroTech',about:'Wood-fired pizza and fresh pasta a block from MetroTech. Big tables, good for groups after class.',items:[['Margherita pizza',13.5,10.8],['Pasta pomodoro',6.5,5.2],['Garlic knots (6)',4.0,3.2]],verified:'2 days ago',tip:'Go before 12:30 on weekdays. After that the line is out the door.',saving:4.0,x:56,y:58,photos:['Storefront','Pasta pomodoro','Dining room']},
+ {id:'charlies',name:"Charlie's Pizzeria",cat:'food',kind:'Pizza by the slice',area:'Navy Yard',deal:'$2 slices',dealLong:'$2 cheese slices, $5 lunch combo',terms:['Weekdays 11 AM–4 PM','Combo is 2 slices + a soda','Limit 4 slices per code'],ends:'Ends Fri, Nov 27',dist:0.6,walk:12,rating:4.4,sub:['Food',4.3],value:4.9,count:96,range:'$2–$9',level:1,diet:[],vibe:['quick'],hours:'Open · until 11 PM',addr:'Flushing Ave & Navy St',lines:[],bus:'B57 · B62',station:'Navy Yard',about:'Classic New York slice counter by the Navy Yard gate. Standing room and two stools.',items:[['Cheese slice',3.5,2.0],['Lunch combo',8.0,5.0],['Pepperoni slice',4.25,3.0]],verified:'yesterday',tip:'The $5 combo is the best lunch deal on this side of Flatbush.',saving:3.0,x:82,y:30,photos:['Slice counter','Lunch combo','Navy Yard gate']},
+ {id:'ediths',name:"Edith's Sandwich",cat:'food',kind:'Breakfast & sandwiches',area:'Downtown BK',deal:'$6 breakfast',dealLong:'$6 breakfast sandwiches, 20% off lunch',terms:['Breakfast deal 7–11 AM','20% off lunch after 11 AM','One code per visit'],ends:'Ongoing',dist:0.2,walk:4,rating:4.2,sub:['Food',4.2],value:4.5,count:128,range:'$6–$15',level:1,diet:[],vibe:['quick'],hours:'Open · until 4 PM',addr:'Lawrence St & Myrtle Ave',lines:['A','C','F','R'],station:'Jay St–MetroTech',about:'Egg-and-cheese on a fresh roll, bagels, and big deli sandwiches. Fast counter service.',items:[['Bacon, egg & cheese',8.0,6.0],['Turkey club',13.0,10.4],['Iced coffee',4.0,3.2]],verified:'3 days ago',tip:'Order ahead at 8:50 and it is ready when you walk past on the way to a 9 AM.',saving:2.0,x:44,y:61,photos:['Breakfast sandwich','Bagels','Counter']},
+ {id:'halal',name:'Fulton Halal Cart',cat:'food',kind:'Halal cart',area:'Fulton Mall',deal:'Free drink',dealLong:'Free drink with any platter',terms:['Show your code when ordering','Platters from $7'],ends:'Ongoing',dist:0.1,walk:2,rating:4.6,sub:['Food',4.6],value:4.8,count:174,range:'$7–$10',level:1,diet:['halal'],vibe:['quick'],hours:'Open · until 9 PM',addr:'Fulton St & Lawrence St',lines:['2','3','4','5','R'],station:'Borough Hall',about:'Chicken and lamb over rice with white sauce. The cart with the green umbrella.',items:[['Chicken over rice',8.0,8.0],['Lamb gyro platter',9.0,9.0],['Soda or water',1.5,0]],verified:'4 days ago',tip:'Ask for extra white sauce. Huge portions, easily two meals.',saving:1.5,x:50,y:68,photos:['Chicken over rice','Gyro','The cart']},
+ {id:'greenbowl',name:'Green Bowl',cat:'food',kind:'Bowls & salads',area:'Boerum Hill',deal:'15% off',dealLong:'15% off any bowl',terms:['Valid all day','Add-ons not discounted'],ends:'Ends Sun, Nov 29',dist:0.5,walk:10,rating:4.5,sub:['Food',4.5],value:4.1,count:83,range:'$11–$15',level:2,diet:['vegan','gf'],vibe:['sit','study'],hours:'Open · until 8 PM',addr:'Smith St & Atlantic Ave',lines:['A','C','G'],station:'Hoyt–Schermerhorn',about:'Grain bowls, tofu, roasted veg. Everything is gluten-free except the pita.',items:[['Harvest bowl',14.0,11.9],['Spicy tofu bowl',13.0,11.05],['Matcha lemonade',5.0,4.25]],verified:'1 week ago',tip:'Quiet in the afternoon, outlets along the window. Good for studying.',saving:2.1,x:33,y:80,photos:['Harvest bowl','Toppings bar','Window seats']},
+ {id:'happycafe',name:'Happy Cafe',cat:'food',kind:'Coffee & pastries',area:'Boerum Hill',deal:'$3 latte',dealLong:'$3 lattes before 10 AM',terms:['Before 10 AM, weekdays','Oat milk included'],ends:'Ongoing',dist:0.6,walk:12,rating:4.7,sub:['Coffee',4.8],value:4.4,count:141,range:'$3–$9',level:1,diet:['vegan'],vibe:['study'],hours:'Open · until 7 PM',addr:'Bergen St & Hoyt St',lines:['F','G'],station:'Bergen St',about:'Small neighborhood café with good espresso and a back garden.',items:[['Latte',5.5,3.0],['Almond croissant',4.5,4.5],['Drip coffee',3.0,2.5]],verified:'2 days ago',tip:'The back garden is open until it gets cold. Bring a jacket.',saving:2.5,x:26,y:87,photos:['Latte','Pastries','Garden']},
+ {id:'pourover',name:'Pour Over Bar',cat:'food',kind:'Specialty coffee',area:'Dumbo',deal:'Free pastry',dealLong:'Free pastry with any coffee after 2 PM',terms:['After 2 PM','While pastries last'],ends:'Ongoing',dist:0.5,walk:11,rating:4.6,sub:['Coffee',4.9],value:4.0,count:67,range:'$4–$8',level:2,diet:[],vibe:['study'],hours:'Open · until 6 PM',addr:'Front St & Jay St',lines:['F'],station:'York St',about:'Single-origin pour overs in an old warehouse with Manhattan Bridge views.',items:[['Pour over',6.0,6.0],['Cortado',4.5,4.5],['Pastry',4.0,0]],verified:'5 days ago',tip:'Get a window seat. The bridge view is worth the walk.',saving:4.0,x:36,y:18,photos:['Pour over','Bridge view','Pastries']},
+ {id:'brickbean',name:'Brick & Bean',cat:'food',kind:'Coffee window',area:'Downtown BK',deal:'2-for-1',dealLong:'2-for-1 drip coffee',terms:['Bring a friend','All day'],ends:'Ends Wed, Nov 25',dist:0.15,walk:3,rating:4.3,sub:['Coffee',4.2],value:4.7,count:58,range:'$3–$7',level:1,diet:['vegan'],vibe:['quick'],hours:'Open · until 8 PM',addr:'Jay St & Willoughby St',lines:['A','C','F','R'],station:'Jay St–MetroTech',about:'Grab-and-go coffee window right across from the Tandon entrance.',items:[['Drip coffee (2)',6.0,3.0],['Cold brew',5.0,4.5],['Bagel & cream cheese',4.0,4.0]],verified:'today',tip:'Fastest coffee before a 9 AM class. Window opens at 7.',saving:3.0,x:58,y:47,photos:['Coffee window','Menu board','Bagels']},
+ {id:'fultonfresh',name:'Fulton Fresh Market',cat:'groceries',kind:'Grocery store',area:'Downtown BK',deal:'10% off Tue',dealLong:'10% off groceries every Tuesday',terms:['Tuesdays only','Excludes alcohol and lottery','Minimum $15'],ends:'Every Tuesday',dist:0.3,walk:6,rating:4.1,sub:['Selection',4.0],value:4.4,count:102,range:'$$',level:1,diet:['vegan','halal','gf'],vibe:['quick'],hours:'Open · until 11 PM',addr:'Fulton St & Bond St',lines:['2','3','4','5'],station:'Nevins St',about:'Full grocery store with a halal butcher, bulk rice and beans, and a big produce section.',items:[['Rice, 5 lb',7.99,7.19],['Eggs, dozen',4.49,4.04],['Chicken thighs, lb',3.99,3.59]],verified:'3 days ago',tip:'Tuesday plus the store’s own coupons stack. The bulk aisle is the cheapest in the area.',saving:3.2,x:60,y:72,photos:['Aisles','Produce','Bulk section']},
+ {id:'hoyt',name:'Hoyt St Produce',cat:'groceries',kind:'Fruit & veg stand',area:'Downtown BK',deal:'$1 bags',dealLong:'$1 fruit bags after 6 PM',terms:['After 6 PM','While stock lasts'],ends:'Ongoing',dist:0.4,walk:8,rating:4.4,sub:['Freshness',4.3],value:4.9,count:45,range:'$1–$5',level:1,diet:['vegan','halal','gf'],vibe:['quick'],hours:'Open · until 8 PM',addr:'Hoyt St & Livingston St',lines:['A','C','G'],station:'Hoyt–Schermerhorn',about:'Sidewalk produce stand. End-of-day bags are mixed fruit or veg.',items:[['Fruit bag',3.0,1.0],['Avocados (3)',4.0,4.0],['Bananas, bunch',1.5,1.5]],verified:'yesterday',tip:'The 6 PM veg bag covers a week of stir-fries.',saving:2.0,x:40,y:73,photos:['Fruit','Greens','The stand']},
+ {id:'secondstitch',name:'Second Stitch Vintage',cat:'clothes',kind:'Vintage & secondhand',area:'Dumbo',deal:'15% off',dealLong:'15% off everything with student ID',terms:['Not valid on consignment rack','In store only'],ends:'Ongoing',dist:0.6,walk:12,rating:4.7,sub:['Selection',4.8],value:4.3,count:89,range:'$12–$60',level:2,diet:[],vibe:['browse'],hours:'Open · until 7 PM',addr:'Water St & Main St',lines:['F'],station:'York St',about:'Curated vintage: 90s denim, workwear, leather jackets. Restocks Tuesday and Friday mornings.',items:[["Levi's 501s",null,'$18–$24'],['Carhartt jackets',null,'$35–$60'],['Band tees',null,'$12–$20']],verified:'4 days ago',tip:'Go Tuesday before noon. The denim rack is freshly restocked and nothing is picked over.',saving:5.0,x:24,y:24,photos:['Jacket rack','Denim wall','Accessories']},
+ {id:'rewear',name:'Re:Wear Dumbo',cat:'clothes',kind:'Thrift · fill-a-bag',area:'Dumbo',deal:'$20 bag',dealLong:'Fill a bag for $20 on Saturdays',terms:['Saturdays only','Bag provided at the door'],ends:'Every Saturday',dist:0.7,walk:14,rating:4.2,sub:['Selection',4.0],value:4.8,count:61,range:'$5–$20',level:1,diet:[],vibe:['browse'],hours:'Open · until 6 PM',addr:'Pearl St & Plymouth St',lines:['F'],station:'York St',about:'Big warehouse thrift. Bins by category, everything priced to move.',items:[['Fill-a-bag (Sat)',null,'$20'],['Jeans',null,'$8–$12'],['Sweaters',null,'$6–$10']],verified:'1 week ago',tip:'The Saturday bag deal is great for resellers. Bring your own tote too.',saving:15.0,x:42,y:13,photos:['Bins','Knitwear','Fill-a-bag']},
+ {id:'jaythrift',name:'Jay St Thrift Co-op',cat:'clothes',kind:'Nonprofit thrift',area:'Downtown BK',deal:'$5 rack',dealLong:'Everything on the front rack is $5',terms:['Front rack only','Proceeds go to local shelters'],ends:'Ongoing',dist:0.3,walk:6,rating:4.0,sub:['Selection',3.8],value:4.7,count:38,range:'$3–$25',level:1,diet:[],vibe:['browse'],hours:'Open · until 7 PM',addr:'Jay St & Tillary St',lines:['A','C','F'],station:'High St',about:'Small nonprofit shop close to campus. Good for basics and last-minute costumes.',items:[['Front rack',null,'$5'],['Coats',null,'$15–$25'],['Shoes',null,'$8–$15']],verified:'5 days ago',tip:'They put out new stuff on the $5 rack every morning.',saving:4.0,x:47,y:36,photos:['Front rack','Hats','Shoes']}
 ];
 const P = id => PLACES.find(p => p.id === id);
 const LOCATIONS = ['NYU Tandon','Current location','Downtown Brooklyn','Dumbo','Boerum Hill','Navy Yard'];
 const NOTIFS = [
-  {id:'n1',place:'dailybite',title:'The Daily Bite is 2 min away',body:'20% off your order with your student ID.',when:'Now'},
-  {id:'n2',place:'secondstitch',title:'Second Stitch restocked',body:'From your list “Dumbo Thrift Crawl”. New denim is out.',when:'2h'},
-  {id:'n3',place:'charlies',title:"Charlie's $2 slices end Friday",body:'You saved this place in “Cheap lunches”.',when:'Yesterday'},
-  {id:'n4',place:null,title:'5 new deals near campus this week',body:'Including $1 fruit bags at Hoyt St Produce.',when:'Mon'}
+  {place:'dailybite',title:'The Daily Bite is 2 min away',body:'20% off your order with your student ID.',when:'Now'},
+  {place:'secondstitch',title:'Second Stitch restocked',body:'From your list “Dumbo Thrift Crawl”. New denim is out.',when:'2h ago'},
+  {place:'charlies',title:"Charlie's $2 slices end Friday",body:'You saved this place in “Cheap lunches”.',when:'Yesterday'},
+  {place:null,title:'5 new deals near campus this week',body:'Including $1 fruit bags at Hoyt St Produce.',when:'Mon'}
 ];
 const SUGGEST = ['Quick eats near me','Halal','Vegan','Coffee','Thrift','Groceries'];
+const DIET = [['vegan','Vegan'],['halal','Halal'],['gf','Gluten-free']];
 
 /* ---------------- State ---------------- */
 function defaults(){
@@ -524,11 +509,12 @@ function load(){ try{ const s = localStorage.getItem(KEY); if(s) return Object.a
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
 state = load();
 
-const ui = {
+const freshUI = () => ({
   tab:'explore', stack:[], exploreCat:null, dealsCat:'all', mapCat:null, mapSel:null,
   filters:{diet:[],vibe:[],level:[],dist:99,sort:'near'}, draft:null,
-  open:{l1:true}, editList:null, onb:0, onbErr:'', query:'', redeemStart:0, lastKey:null, pushShown:false
-};
+  open:{l1:true}, editList:null, onb:0, onbErr:'', query:'', redeemStart:0, lastKey:null, pushShown:false, dietSuggested:false
+});
+const ui = freshUI();
 const scrollMem = {};
 const view = document.getElementById('view');
 const tabbar = document.getElementById('tabbar');
@@ -544,18 +530,18 @@ const inAnyList = id => state.lists.some(l => l.ids.includes(id));
 const initials = () => (state.name || 'You').trim().slice(0,1).toUpperCase();
 const ratingOf = p => { const r = state.ratings[p.id]; if(!r) return {avg:p.rating,count:p.count}; const c = p.count + 1; return {avg: Math.round(((p.rating*p.count + r.stars)/c)*10)/10, count:c}; };
 const totalSaved = () => state.redeemed.reduce((a,r)=>a+r.saved,0);
-function catColor(c){ return `var(--cat-${c})`; }
+const monogram = p => p.name.replace(/^The /,'').replace(/[^A-Za-z ]/g,' ').split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+const PAT = {food:0, groceries:1, clothes:2};
 function bullets(p){
   if(!p.lines.length) return `<span class="bus">${esc(p.bus)}</span>`;
-  return p.lines.map(l => `<span class="bullet ${['N','Q','R','W'].includes(l)?'y':''}" style="--b:${LINE_COLORS[l]}">${l}</span>`).join('');
+  return p.lines.map(l => `<span class="bullet">${l}</span>`).join('');
 }
-function photo(p, i, cls, em){ const ph = p.photos[i||0]; return `<div class="ph ${cls||''}" style="background:${ph[1]}"><span class="em" ${em?`style="font-size:${em}px"`:''}>${ph[0]}</span></div>`; }
-function thumb(p){ const ph = p.photos[0]; return `<div class="thumb" style="background:${ph[1]}" aria-hidden="true">${ph[0]}</div>`; }
-function starRow(p){ const r = ratingOf(p); return `<span class="star">${ic('star',12,true)}${r.avg.toFixed(1)}</span>`; }
+function thumb(p){ return `<div class="thumb tile p${PAT[p.cat]}" aria-hidden="true"><span class="mg">${monogram(p)}</span></div>`; }
+function starRow(p){ const r = ratingOf(p); return `<span class="star">${ic('star',11,true)}${r.avg.toFixed(1)}</span>`; }
 
 function filtered(cat){
   const f = ui.filters;
-  let list = PLACES.filter(p => (!cat || cat==='all' || p.cat===cat)
+  const list = PLACES.filter(p => (!cat || cat==='all' || p.cat===cat)
     && f.diet.every(d => p.diet.includes(d))
     && (!f.vibe.length || f.vibe.some(v => p.vibe.includes(v)))
     && (!f.level.length || f.level.includes(p.level))
@@ -570,29 +556,29 @@ function sortList(list, s){
   return l;
 }
 function filterCount(f){ f=f||ui.filters; return f.diet.length+f.vibe.length+f.level.length+(f.dist<99?1:0); }
-const SORT_LABEL = {near:'Nearest first',rating:'Best rated',saving:'Biggest saving'};
+const SORT_LABEL = {near:'Nearest',rating:'Best rated',saving:'Biggest saving'};
 
 /* ---------------- Shared pieces ---------------- */
 function header(title, right){ return `<header class="top"><h1>${title}</h1>${right||''}</header>`; }
-function subHeader(title, right){ return `<header class="top"><button class="back" data-act="back" aria-label="Back">${ic('chevL',24)}</button><h1 class="sm">${esc(title)}</h1>${right||''}</header>`; }
+function subHeader(title, right){ return `<header class="top sub"><button class="back" data-act="back" aria-label="Back">${ic('chevL',24)}</button><h1 class="sm">${esc(title)}</h1>${right||''}</header>`; }
 function dealCard(p){
   const saved = inAnyList(p.id);
   return `<div class="card" role="button" tabindex="0" data-act="open" data-id="${p.id}" aria-label="${esc(p.name)}, ${esc(p.deal)}">
-    <div class="ph" style="background:${p.photos[0][1]}"><span class="em">${p.photos[0][0]}</span><span class="sticker">${esc(p.deal)}</span></div>
+    <div class="tile p${PAT[p.cat]}"><span class="tag">${esc(p.deal)}</span><span class="mg">${monogram(p)}</span></div>
     <button class="save-mini" data-act="saveSheet" data-id="${p.id}" aria-label="${saved?'Saved. Edit lists':'Save'}">${ic('bookmark',16,saved)}</button>
-    <div class="body"><span class="name">${esc(p.name)}</span><span class="meta"><span class="num">${p.dist} mi</span>·${starRow(p)}</span></div>
+    <div style="display:flex;flex-direction:column;gap:3px;min-width:0"><span class="name">${esc(p.name)}</span><span class="meta">${p.dist} mi · ${starRow(p)}</span></div>
   </div>`;
 }
 function dealRow(p, extra){
   return `<div class="row-item" role="button" tabindex="0" data-act="open" data-id="${p.id}">
     ${thumb(p)}
     <div class="txt"><span class="t1">${esc(p.name)} <span>· ${esc(p.area)}</span></span>
-      <span class="t2"><span class="sticker">${esc(p.deal)}</span><span class="meta"><span class="num">${p.dist} mi</span>·${starRow(p)}${extra?'· '+extra:''}</span></span></div>
-    <span class="arrow">${ic('arrowR',20)}</span>
+      <span class="t2"><span class="tag">${esc(p.deal)}</span><span class="meta">${p.dist} mi · ${starRow(p)}${extra?' · '+extra:''}</span></span></div>
+    ${ic('arrowR',20)}
   </div>`;
 }
 
-/* map: shapes stretch with the box, labels and pins are positioned in % on top */
+/* map: hatched shapes stretch with the box; labels and pins are positioned in % on top */
 function mapHTML(mode){
   const cat = mode==='full' ? ui.mapCat : ui.exploreCat;
   const list = PLACES.filter(p => !cat || p.cat===cat);
@@ -601,30 +587,30 @@ function mapHTML(mode){
   for(let i=0;i<9;i++){ const x=6+i*11.5; streets.push(`<line x1="${x}" y1="14" x2="${x+5}" y2="100" />`); }
   for(let j=0;j<8;j++){ const y=24+j*11; streets.push(`<line x1="0" y1="${y}" x2="100" y2="${y-3}" />`); }
   const svg = `<svg class="base" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-    <rect x="0" y="0" width="100" height="100" fill="var(--map-land)"/>
-    <g stroke="var(--map-street)" stroke-width="1.1" fill="none">${streets.join('')}</g>
-    <path d="M58 100 L66 40 L78 0" stroke="var(--map-street)" stroke-width="2.6" fill="none"/>
-    <path d="M0 48 L100 40" stroke="var(--map-street)" stroke-width="2.4" fill="none"/>
-    <path d="M0 0 H100 V8 C86 12 80 6 70 10 C58 14 48 9 36 12 C22 15 12 9 0 13 Z" fill="var(--map-water)"/>
-    <path d="M8 12 C18 10 26 15 34 12 L34 17 C24 19 16 16 8 18 Z" fill="var(--map-park)"/>
-    <rect x="84" y="50" width="13" height="16" rx="1" fill="var(--map-park)"/>
-    <rect x="62" y="12" width="30" height="14" rx="1.5" fill="var(--map-park)" opacity=".45"/>
-    <path d="M30 0 L33 14" stroke="var(--map-street)" stroke-width="1.8"/><path d="M44 0 L46 12" stroke="var(--map-street)" stroke-width="1.8"/>
+    <defs>
+      <pattern id="hatch-${mode}" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" stroke="var(--pat)" stroke-width=".7"/></pattern>
+      <pattern id="dots-${mode}" width="2" height="2" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".35" fill="var(--ink-2)"/></pattern>
+    </defs>
+    <rect x="0" y="0" width="100" height="100" fill="var(--wash)"/>
+    <g stroke="var(--paper)" stroke-width="1.2" fill="none">${streets.join('')}</g>
+    <path d="M58 100 L66 40 L78 0" stroke="var(--paper)" stroke-width="2.8" fill="none"/>
+    <path d="M0 48 L100 40" stroke="var(--paper)" stroke-width="2.6" fill="none"/>
+    <path d="M0 0 H100 V8 C86 12 80 6 70 10 C58 14 48 9 36 12 C22 15 12 9 0 13 Z" fill="url(#hatch-${mode})"/>
+    <path d="M0 13 C12 9 22 15 36 12 C48 9 58 14 70 10 C80 6 86 12 100 8" stroke="var(--ink)" stroke-width="1" fill="none" vector-effect="non-scaling-stroke"/>
+    <path d="M8 13 C18 11 26 15 34 12.5 L34 17 C24 19 16 16 8 18 Z" fill="url(#dots-${mode})"/>
+    <rect x="84" y="50" width="13" height="16" fill="url(#dots-${mode})"/>
+    <path d="M30 0 L33 14" stroke="var(--paper)" stroke-width="1.8"/><path d="M44 0 L46 12" stroke="var(--paper)" stroke-width="1.8"/>
   </svg>`;
-  const labels = `<span class="lbl water" style="left:50%;top:5%">East River</span>
-    <span class="lbl" style="left:${mode==='full'?24:22}%;top:${mode==='full'?30:31}%">Dumbo</span>
-    <span class="lbl" style="left:78%;top:20%">Navy Yard</span>
-    <span class="lbl" style="left:36%;top:52%">Downtown BK</span>
-    <span class="lbl" style="left:${mode==='full'?18:16}%;top:94%">Boerum Hill</span>
-    <span class="lbl" style="left:90%;top:70%">Ft Greene Pk</span>`;
-  const pins = list.map(p => {
-    const ph = p.photos[0];
-    const head = (mode==='full' && sel && sel.id===p.id) ? `${ph[0]} ${esc(p.deal)}` : ph[0];
-    return `<button class="pin ${sel&&sel.id===p.id?'sel':''}" style="left:${p.x}%;top:${p.y}%;--pc:${catColor(p.cat)}" data-act="pin" data-id="${p.id}" aria-label="${esc(p.name)}, ${esc(p.deal)}"><span class="head">${head}</span><span class="tail"></span></button>`;
-  }).join('');
-  const pop = sel ? `<div class="pop" role="button" tabindex="0" data-act="open" data-id="${sel.id}">${thumb(sel)}<div class="txt"><span class="t1">${esc(sel.name)}</span><span class="meta"><span class="sticker">${esc(sel.deal)}</span><span class="num">${sel.walk} min walk</span></span></div>${ic('chevR',20)}</div>` : '';
+  const labels = `<span class="lbl water" style="left:52%;top:5%">East River</span>
+    <span class="lbl" style="left:20%;top:31%">Dumbo</span>
+    <span class="lbl" style="left:80%;top:20%">Navy Yard</span>
+    <span class="lbl" style="left:34%;top:51%">Downtown BK</span>
+    <span class="lbl" style="left:16%;top:95%">Boerum Hill</span>
+    <span class="lbl" style="left:90%;top:72%">Ft Greene Pk</span>`;
+  const pins = list.map(p => `<button class="pin ${sel&&sel.id===p.id?'sel':''}" style="left:${p.x}%;top:${p.y}%" data-act="pin" data-id="${p.id}" aria-label="${esc(p.name)}, ${esc(p.deal)}"><span class="dot"></span><span class="flagl"><span>${esc(p.deal)}</span><i></i></span></button>`).join('');
+  const pop = sel ? `<div class="pop" role="button" tabindex="0" data-act="open" data-id="${sel.id}">${thumb(sel)}<div class="txt"><span class="t1">${esc(sel.name)}</span><span class="meta"><span class="tag">${esc(sel.deal)}</span>${sel.walk} min walk</span></div>${ic('arrowR',20)}</div>` : '';
   const me = `<span class="me" style="left:50%;top:52%" title="You are here"></span>`;
-  return `<div class="map ${mode}" role="group" aria-label="Map of deals">${svg}${labels}${me}${pins}${pop}${mode==='mini'?`<button class="expand" data-act="fullMap" aria-label="Open full map">${ic('expand',18)}</button>`:''}</div>`;
+  return `<div class="map ${mode}" role="group" aria-label="Map of deals">${svg}${labels}${me}${pins}${pop}${mode==='mini'?`<button class="expand" data-act="fullMap" aria-label="Open full map">${ic('expand',17)}</button>`:''}</div>`;
 }
 
 /* ---------------- Screens ---------------- */
@@ -635,20 +621,24 @@ function renderExplore(){
   const unread = !state.readNotifs;
   return header('Explore', `<button class="icon-btn" data-act="notifs" aria-label="Notifications${unread?', unread':''}">${ic('bell')}${unread?'<span class="dot"></span>':''}</button>`) +
   `<div class="scroll"><div class="pad stack-lg" style="padding-top:16px">
-    <div class="search-row">
-      <div class="search-field">
-        <button class="search-open" data-act="search">${ic('search',19)}<span>Quick eats near me…</span></button>
-        <span class="vr"></span>
-        <button class="loc-btn" data-act="location" aria-label="Change area">${ic('pin',19)}</button>
+    <div class="stack" style="gap:10px">
+      <div class="search-row">
+        <div class="search-field">
+          <button class="search-open" data-act="search">${ic('search',19)}<span>Quick eats near me…</span></button>
+          <span class="vr"></span>
+          <button class="loc-btn" data-act="location" aria-label="Change area">${ic('pin',19)}</button>
+        </div>
+        <button class="avatar" data-act="profile" aria-label="Your profile">${initials()}</button>
       </div>
-      <button class="avatar" data-act="profile" aria-label="Your profile">${initials()}</button>
+      <div class="chips" role="group" aria-label="Category">${CATS.map(c=>`<button class="chip ${cat===c.id?'on':''}" data-act="exCat" data-id="${c.id}" aria-pressed="${cat===c.id}">${c.label}</button>`).join('')}</div>
     </div>
-    <div class="chips" role="group" aria-label="Category">${CATS.map(c=>`<button class="chip ${cat===c.id?'on':''}" data-act="exCat" data-id="${c.id}" aria-pressed="${cat===c.id}">${c.label}</button>`).join('')}</div>
-    <div class="area-line">${ic('locate',14)} Deals near <b>${esc(state.location)}</b></div>
-    ${mapHTML('mini')}
+    <div class="stack" style="gap:8px">
+      <div class="area-line">${ic('locate',13)} Near <b>${esc(state.location)}</b> · ${near.length} deals</div>
+      ${mapHTML('mini')}
+    </div>
     <section><div class="sec-head"><h2>Student deals near you</h2><button class="link" data-act="tab" data-id="deals">See all</button></div>
       <div class="grid2">${near.slice(0,4).map(dealCard).join('')}</div></section>
-    ${ending.length?`<section><h2>Ending this week</h2><div class="rows">${ending.map(p=>dealRow(p, esc(p.ends.replace('Ends ','')))).join('')}</div></section>`:''}
+    ${ending.length?`<section><div class="sec-head"><h2>Ending this week</h2></div><div class="rows">${ending.map(p=>dealRow(p, esc(p.ends.replace('Ends ','')))).join('')}</div></section>`:''}
   </div></div>`;
 }
 
@@ -660,31 +650,31 @@ function renderDeals(){
     <div class="chips" role="group" aria-label="Category">
       <button class="chip ${ui.dealsCat==='all'?'on':''}" data-act="dCat" data-id="all">All</button>
       ${CATS.map(c=>`<button class="chip ${ui.dealsCat===c.id?'on':''}" data-act="dCat" data-id="${c.id}" aria-pressed="${ui.dealsCat===c.id}">${c.label}</button>`).join('')}
-      <button class="chip" data-act="filters">${ic('sliders',16)} Filters ${fc?`<span class="cnt">${fc}</span>`:''}</button>
+      <button class="chip ghost" data-act="filters">${ic('sliders',15)} Filters${fc?` <span class="cnt">(${fc})</span>`:''}</button>
     </div>
-    <div class="summary"><span class="num">${list.length} deal${list.length===1?'':'s'}</span><button data-act="filters">${ic('sort',16)} ${SORT_LABEL[ui.filters.sort]}</button></div>
+    <div class="summary"><span>${list.length} deal${list.length===1?'':'s'}</span><button data-act="filters">${ic('sort',14)} ${SORT_LABEL[ui.filters.sort]}</button></div>
   </div>
   <div class="scroll"><div class="pad">
     ${list.length ? `<div class="rows">${list.map(p=>dealRow(p)).join('')}</div>` :
-      `<div class="empty"><span class="big">🔍</span><h3>No deals match these filters</h3><p>Try a longer distance or fewer dietary filters.</p><button class="btn outline" style="width:auto" data-act="clearFilters">Clear filters</button></div>`}
+      `<div class="empty"><h3>No deals match these filters</h3><p>Try a longer walking distance or fewer dietary filters.</p><button class="btn outline" style="width:auto;margin-top:6px" data-act="clearFilters">Clear filters</button></div>`}
   </div></div>`;
 }
 
 function renderSaved(){
   const lists = state.lists;
   return header('Saved', `<button class="icon-btn" data-act="newList" aria-label="New list">${ic('plus')}</button>`) +
-  `<div class="scroll"><div class="pad stack" style="padding-top:16px">
+  `<div class="scroll"><div class="pad" style="padding-top:18px">
     ${lists.length ? lists.map(l => {
       const open = !!ui.open[l.id], edit = ui.editList===l.id;
       return `<div class="acc ${open?'open':''}">
-        <button class="acc-h" data-act="toggleList" data-id="${l.id}" aria-expanded="${open}"><h3>${esc(l.name)}</h3><span class="count num">${l.ids.length}</span><span class="sp"></span><span class="chev">${ic('chevD',20)}</span></button>
+        <button class="acc-h" data-act="toggleList" data-id="${l.id}" aria-expanded="${open}"><h3>${esc(l.name)}</h3><span class="count">(${l.ids.length})</span><span class="sp"></span><span class="chev">${ic('chevD',20)}</span></button>
         ${open?`<div class="acc-b">
-          ${l.ids.length? l.ids.map(id=>{const p=P(id); return `<div class="row-item" role="button" tabindex="0" data-act="${edit?'noop':'open'}" data-id="${id}">${thumb(p)}<div class="txt"><span class="t1">${esc(p.name)}</span><span class="t2"><span class="sticker">${esc(p.deal)}</span><span class="meta num">${p.dist} mi</span></span></div>${edit?`<button class="rm" data-act="rmFromList" data-id="${id}" data-list="${l.id}" aria-label="Remove ${esc(p.name)}">${ic('x',16)}</button>`:`<span class="arrow">${ic('chevR',20)}</span>`}</div>`;}).join('')
-            : `<div class="empty" style="padding:24px"><p>No places yet. Tap the bookmark on any deal to add it here.</p></div>`}
+          ${l.ids.length? l.ids.map(id=>{const p=P(id); return `<div class="row-item" role="button" tabindex="0" data-act="${edit?'noop':'open'}" data-id="${id}">${thumb(p)}<div class="txt"><span class="t1">${esc(p.name)}</span><span class="t2"><span class="tag">${esc(p.deal)}</span><span class="meta">${p.dist} mi</span></span></div>${edit?`<button class="rm" data-act="rmFromList" data-id="${id}" data-list="${l.id}" aria-label="Remove ${esc(p.name)}">${ic('x',16)}</button>`:ic('chevR',20)}</div>`;}).join('')
+            : `<p class="hint" style="padding:6px 0 12px">No places yet. Tap the bookmark on any deal to add it here.</p>`}
           <div class="acc-foot">${edit?`<button data-act="editList" data-id="">Done</button>`:`<button data-act="editList" data-id="${l.id}">Edit</button><button data-act="renameList" data-id="${l.id}">Rename</button>`}<button class="del" data-act="delList" data-id="${l.id}">Delete list</button></div>
         </div>`:''}
       </div>`;}).join('') :
-      `<div class="empty"><span class="big">🔖</span><h3>No saved lists</h3><p>Group places you want to try, like “Cheap lunches” or “Study spots”.</p><button class="btn primary" style="width:auto" data-act="newList">${ic('plus',18)} New list</button></div>`}
+      `<div class="empty"><h3>No saved lists</h3><p>Group places you want to try, like “Cheap lunches” or “Study spots”.</p><button class="btn primary" style="width:auto;margin-top:6px" data-act="newList">${ic('plus',18)} New list</button></div>`}
   </div></div>`;
 }
 
@@ -694,49 +684,48 @@ function renderPlace(id){
   return subHeader(p.name, `<button class="icon-btn" data-act="share" data-id="${id}" aria-label="Share">${ic('share',20)}</button>`) +
   `<div class="scroll"><div class="pad stack-lg" style="padding-top:14px">
     <div class="carousel">
-      <div class="car-track" id="track">${p.photos.map((ph,i)=>`<div class="slide ph" style="background:${ph[1]}"><span class="cap">${esc(ph[2])}</span><span class="em">${ph[0]}</span></div>`).join('')}</div>
-      <button class="car-next" data-act="carNext" aria-label="Next photo">${ic('arrowR',26)}</button>
-      <div class="dots" id="dots">${p.photos.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>
+      <div class="car-track" id="track">${p.photos.map((cap,i)=>`<div class="slide tile p${i%3}"><span class="cap">${esc(cap)}</span><span class="mg">${monogram(p)}</span></div>`).join('')}</div>
+      <button class="car-next" data-act="carNext" aria-label="Next photo">${ic('arrowR',22)}</button>
+      <span class="car-count" id="carCount">1/${p.photos.length}</span>
     </div>
     <div class="stack" style="gap:12px">
       <div class="title-blk"><h2>${esc(p.name)}</h2><p class="sub">${esc(p.kind)} · ${esc(p.area)} · ${'$'.repeat(p.level)}</p></div>
-      <div class="tags"><span class="sticker">${esc(p.dealLong)}</span><span class="pill">${ic('shield',14)} Student offer</span>
-        ${p.diet.map(d=>`<span class="pill good">${{vegan:'Vegan options',halal:'Halal',gf:'Gluten-free'}[d]}</span>`).join('')}</div>
+      <div class="tags"><span class="tag lg">${esc(p.dealLong)}</span><span class="flag">${ic('shield',13)} Student offer</span>
+        ${p.diet.map(d=>`<span class="flag">${{vegan:'Vegan options',halal:'Halal',gf:'Gluten-free'}[d]}</span>`).join('')}</div>
     </div>
     <div class="info">
-      <div class="info-row">${ic('pin',18)}<div class="v"><span>${esc(p.addr)}</span><span class="s"><span class="num">${p.dist} mi · ${p.walk} min walk</span> · ${bullets(p)} ${esc(p.station)}</span></div></div>
-      <div class="info-row">${ic('clock',18)}<div class="v"><span class="open">${esc(p.hours)}</span><span class="s">Deal: ${esc(p.ends)}</span></div></div>
+      <div class="info-row">${ic('pin',18)}<div class="v"><span>${esc(p.addr)}</span><span class="s"><span class="mono">${p.dist} mi · ${p.walk} min walk</span> · ${bullets(p)} ${esc(p.station)}</span></div></div>
+      <div class="info-row">${ic('clock',18)}<div class="v"><span style="font-weight:600">${esc(p.hours)}</span><span class="s">Deal: ${esc(p.ends)}</span></div></div>
     </div>
     <div class="stack" style="gap:8px">
       <div class="stats">
         <div class="r"><span class="k">Price range</span><b>${esc(p.range)}</b></div>
         <div class="r"><span class="k">${esc(p.sub[0])}</span><b>${p.sub[1].toFixed(1)}/5</b></div>
         <div class="r"><span class="k">Value for money</span><b>${p.value.toFixed(1)}/5</b></div>
-        <div class="r"><span class="k">Overall</span><b>${starRowPlain(r.avg)}</b></div>
+        <div class="r"><span class="k">Overall</span><b>${r.avg.toFixed(1)}/5</b></div>
       </div>
-      <p class="basis">${ic('shield',14)} Based on <b class="num">${r.count}</b> verified student ratings${mine?` · You rated it ${mine.stars}★`:''}</p>
+      <p class="basis">${ic('shield',14)} Based on <b class="mono">${r.count}</b> verified student ratings${mine?` · You rated it ${mine.stars}/5`:''}</p>
     </div>
     <div class="actions">
-      <button class="act" data-act="directions" data-id="${id}">${ic('nav',17)} Directions</button>
-      <button class="act" data-act="share" data-id="${id}">${ic('share',17)} Share</button>
-      <button class="act ${mine?'on':''}" data-act="rate" data-id="${id}">${ic('star',17,!!mine)} ${mine?'Rated':'Rate'}</button>
+      <button class="act" data-act="directions" data-id="${id}">${ic('nav',16)} Directions</button>
+      <button class="act" data-act="share" data-id="${id}">${ic('share',16)} Share</button>
+      <button class="act ${mine?'on':''}" data-act="rate" data-id="${id}">${ic('star',16,!!mine)} ${mine?'Rated':'Rate'}</button>
     </div>
-    <section><h2>${isClothes?'Price guide':'Student prices'}</h2>
-      <div class="price-list">${p.items.map(it => it[1]===null
-        ? `<div class="r"><span>${esc(it[0])}</span><b>${esc(it[2])}</b></div>`
-        : `<div class="r"><span>${esc(it[0])}</span><span>${it[2]<it[1]?`<s class="num">${money(it[1])}</s>`:''}<b>${it[2]===0?'Free':money(it[2])}</b></span></div>`).join('')}</div>
+    <section><div class="sec-head"><h2>${isClothes?'Price guide':'Student prices'}</h2></div>
+      <div class="receipt-list">${p.items.map(it => it[1]===null
+        ? `<div class="r"><span class="n">${esc(it[0])}</span><span class="lead"></span><b>${esc(it[2])}</b></div>`
+        : `<div class="r"><span class="n">${esc(it[0])}</span><span class="lead"></span><span>${it[2]<it[1]?`<s>${money(it[1])}</s>`:''}<b>${it[2]===0?'FREE':money(it[2])}</b></span></div>`).join('')}</div>
       <p class="verified">${ic('check',14)} Prices checked by students ${esc(p.verified)}</p>
     </section>
-    <div class="tip"><q>${esc(p.tip)}</q><span class="who">${ic('shield',13)} Verified NYU student</span></div>
-    <section><h2>About</h2><p class="prose">${esc(p.about)}</p></section>
-    <section><h2>Offer terms</h2><ul class="terms">${p.terms.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></section>
+    <div class="tip"><q>${esc(p.tip)}</q><span class="who">Verified NYU student</span></div>
+    <section><div class="sec-head"><h2>About</h2></div><p class="prose">${esc(p.about)}</p></section>
+    <section><div class="sec-head"><h2>Offer terms</h2></div><ul class="terms">${p.terms.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></section>
   </div></div>
   <div class="bottom-cta">
     <button class="btn outline ${saved?'on':''}" data-act="saveSheet" data-id="${id}">${ic('bookmark',19,saved)} ${saved?'Saved':'Save'}</button>
     <button class="btn primary" data-act="redeemAsk" data-id="${id}">Use student offer</button>
   </div>`;
 }
-function starRowPlain(v){ return `<span style="display:inline-flex;gap:4px;align-items:center">${ic('star',14,true)}<span class="num">${v.toFixed(1)}</span></span>`; }
 
 function qrSVG(seed){
   let s = 0; for(const ch of seed) s = (s*31 + ch.charCodeAt(0)) & 0x7fffffff;
@@ -755,42 +744,43 @@ function renderRedeem(v){
   const p = P(v.id);
   if(v.step==='done'){
     const mine = state.ratings[p.id];
-    const ex = p.items[0], ex2 = p.items[1];
-    const sub = (typeof ex[1]==='number'&&typeof ex2[1]==='number') ? ex[1]+ex2[1] : null;
-    return `<header class="top"><h1 class="sm" style="text-align:center">Offer used</h1></header>
-    <div class="redeem" style="justify-content:flex-start;padding-top:24px">
-      <div class="big-check">${ic('check',40)}</div>
+    const a = p.items[0], b = p.items[1];
+    const showReceipt = p.id==='dailybite';
+    const sub = showReceipt ? a[1]+b[1] : 0;
+    return `<header class="top sub"><h1 class="sm" style="text-align:center">Offer used</h1></header>
+    <div class="redeem" style="padding-top:22px">
+      <div class="big-check">${ic('check',36)}</div>
       <h2>You saved ${money(p.saving)}</h2>
       <p class="hint">at ${esc(p.name)} · ${new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'})}</p>
-      ${sub!==null && p.cat==='food' && p.id==='dailybite' ? `<div class="receipt"><div class="r"><span>${esc(ex[0])}</span><span>${money(ex[1])}</span></div><div class="r"><span>${esc(ex2[0])}</span><span>${money(ex2[1])}</span></div><div class="r disc"><span>Student discount (20%)</span><span>−${money(sub*0.2)}</span></div><div class="r tot"><span>Total</span><span>${money(sub*0.8)}</span></div></div>`:''}
-      <div class="stat hl" style="width:100%;flex-direction:row;justify-content:space-between;align-items:center;padding:14px 16px"><span style="font-size:14px">Saved this semester</span><b>${money(totalSaved())}</b></div>
+      ${showReceipt ? `<div class="receipt"><div class="head">${esc(p.name)}</div><div class="r"><span>${esc(a[0])}</span><span>${money(a[1])}</span></div><div class="r"><span>${esc(b[0])}</span><span>${money(b[1])}</span></div><div class="r"><span>Subtotal</span><span>${money(sub)}</span></div><div class="r"><span>Student discount 20%</span><span>−${money(sub*0.2)}</span></div><div class="r tot"><span>TOTAL</span><span>${money(sub*0.8)}</span></div></div>`:''}
+      <div class="saved-sem"><span>Saved this semester</span><b>${money(totalSaved())}</b></div>
       <div class="stack" style="width:100%;gap:8px;margin-top:6px">
-        <p style="font-weight:600">${mine?'Thanks for rating!':`How was ${esc(p.name)}?`}</p>
-        <div class="stars" role="group" aria-label="Rate from 1 to 5 stars">${[1,2,3,4,5].map(n=>`<button data-act="quickRate" data-id="${p.id}" data-n="${n}" class="${mine&&mine.stars>=n?'on':''}" aria-label="${n} star${n>1?'s':''}">${ic('star',34,true)}</button>`).join('')}</div>
+        <p style="font-weight:700">${mine?'Thanks for rating':`How was ${esc(p.name)}?`}</p>
+        <div class="stars" role="group" aria-label="Rate from 1 to 5 stars">${[1,2,3,4,5].map(n=>`<button data-act="quickRate" data-id="${p.id}" data-n="${n}" class="${mine&&mine.stars>=n?'on':''}" aria-label="${n} star${n>1?'s':''}">${ic('star',32)}</button>`).join('')}</div>
         ${mine?'':`<p class="hint">Your rating helps other students know what is worth it.</p>`}
       </div>
-      <div class="grow" style="flex:1"></div>
+      <div style="flex:1"></div>
       <button class="btn primary" data-act="finishRedeem">Done</button>
     </div>`;
   }
-  return `<header class="top"><button class="back" data-act="back" aria-label="Close">${ic('x',24)}</button><h1 class="sm">Student offer</h1></header>
+  return `<header class="top sub"><button class="back" data-act="back" aria-label="Close">${ic('x',24)}</button><h1 class="sm">Student offer</h1></header>
   <div class="redeem">
-    <p class="hint" style="margin-top:4px">Show this screen at the counter</p>
+    <p class="label-sm" style="margin-top:4px">Show this screen at the counter</p>
     <h2>${esc(p.name)}</h2>
-    <span class="sticker" style="font-size:15px;padding:9px 12px 9px 19px">${esc(p.dealLong)}</span>
+    <span class="tag lg">${esc(p.dealLong)}</span>
     <div class="qr-plate">${qrSVG(p.id + state.email)}</div>
     <div class="code" aria-label="Code ${codeFor(p.id)}">${codeFor(p.id)}</div>
-    <div class="timer">${ic('clock',16)} Code expires in <b id="timer">15:00</b></div>
-    <div class="verified-id"><span class="ok">${ic('check',18)}</span><div><b>${esc(state.name||'Student')}</b> · Verified NYU student<br><span class="hint">${esc(state.email||'')}</span></div></div>
-    <div class="grow" style="flex:1"></div>
+    <div class="timer">${ic('clock',14)} Expires in <b id="timer">15:00</b></div>
+    <div class="verified-id"><span class="ok">${ic('check',16)}</span><div><b>${esc(state.name||'Student')}</b> · Verified NYU student<br><span class="hint">${esc(state.email||'')}</span></div></div>
+    <div style="flex:1"></div>
     <button class="btn primary" data-act="scanned">Cashier scanned it</button>
-    <p class="hint" style="font-size:12px">In this prototype, tap the button to simulate the cashier scanning your code.</p>
+    <p class="hint" style="font-size:12px">Prototype: tap the button to simulate the cashier scanning your code.</p>
   </div>`;
 }
 
 function renderSearch(){
   return `<div class="search-top">
-    <div class="search-field">${ic('search',19)}<input id="q" type="search" placeholder="Search places, food, or deals" value="${esc(ui.query)}" autocomplete="off" aria-label="Search"></div>
+    <div class="search-field">${ic('search',19)}<input id="q" type="search" placeholder="Search places, food or deals" value="${esc(ui.query)}" autocomplete="off" aria-label="Search"></div>
     <button class="cancel" data-act="back">Cancel</button>
   </div>
   <div class="scroll"><div class="pad" id="results" style="padding-top:8px">${searchResults(ui.query)}</div></div>`;
@@ -798,25 +788,24 @@ function renderSearch(){
 function searchResults(q){
   q = q.trim().toLowerCase();
   if(!q){
-    return `${state.recent.length?`<p class="label-sm" style="margin-top:12px">Recent</p>${state.recent.map(s=>`<button class="sug" data-act="sug" data-q="${esc(s)}">${ic('history',18)}<span>${esc(s)}</span></button>`).join('')}`:''}
-      <p class="label-sm" style="margin-top:20px">Try</p><div class="chips" style="flex-wrap:wrap;margin:0;padding:0">${SUGGEST.map(s=>`<button class="chip sm" data-act="sug" data-q="${esc(s)}">${esc(s)}</button>`).join('')}</div>`;
+    return `${state.recent.length?`<p class="label-sm" style="margin-top:14px">Recent</p>${state.recent.map(s=>`<button class="sug" data-act="sug" data-q="${esc(s)}">${ic('history',18)}<span>${esc(s)}</span></button>`).join('')}`:''}
+      <p class="label-sm" style="margin:22px 0 10px">Try</p><div class="opt-grid">${SUGGEST.map(s=>`<button class="chip sm" data-act="sug" data-q="${esc(s)}">${esc(s)}</button>`).join('')}</div>`;
   }
   let res;
   if(q.includes('quick eats')||q.includes('near me')) res = sortList(PLACES.filter(p=>p.cat==='food'&&p.walk<=6),'near');
   else {
     const words = q.split(/\s+/);
-    res = PLACES.filter(p => { const hay = [p.name,p.kind,p.area,p.deal,p.dealLong,p.cat,p.about,p.diet.join(' '),p.diet.includes('gf')?'gluten-free gluten free':'',p.items.map(i=>i[0]).join(' ')].join(' ').toLowerCase(); return words.every(w=>hay.includes(w)); });
-    res = sortList(res,'near');
+    res = sortList(PLACES.filter(p => { const hay = [p.name,p.kind,p.area,p.deal,p.dealLong,p.cat,p.about,p.diet.join(' '),p.diet.includes('gf')?'gluten-free gluten free':'',p.items.map(i=>i[0]).join(' ')].join(' ').toLowerCase(); return words.every(w=>hay.includes(w)); }),'near');
   }
-  if(!res.length) return `<div class="empty"><span class="big">🤷</span><h3>No results for “${esc(q)}”</h3><p>Try “pizza”, “coffee”, “halal” or “thrift”.</p></div>`;
-  return `<p class="label-sm" style="margin-top:12px">${res.length} result${res.length>1?'s':''}</p><div class="rows">${res.map(p=>dealRow(p)).join('')}</div>`;
+  if(!res.length) return `<div class="empty"><h3>No results for “${esc(q)}”</h3><p>Try “pizza”, “coffee”, “halal” or “thrift”.</p></div>`;
+  return `<p class="label-sm" style="margin-top:14px">${res.length} result${res.length>1?'s':''}</p><div class="rows">${res.map(p=>dealRow(p)).join('')}</div>`;
 }
 
 function renderMap(){
   const list = PLACES.filter(p => !ui.mapCat || p.cat===ui.mapCat);
-  return `<div class="view" style="position:relative;flex:1">${mapHTML('full')}
+  return `<div class="view">${mapHTML('full')}
     <div class="map-top">
-      <div class="bar"><button class="back-fab" data-act="back" aria-label="Back">${ic('chevL',24)}</button><div class="count"><span class="num">${list.length} deals near ${esc(state.location)}</span></div></div>
+      <div class="bar"><button class="back-fab" data-act="back" aria-label="Back">${ic('chevL',24)}</button><div class="count">${list.length} deals near ${esc(state.location)}</div></div>
       <div class="chips"><button class="chip sm ${!ui.mapCat?'on':''}" data-act="mapCat" data-id="">All</button>${CATS.map(c=>`<button class="chip sm ${ui.mapCat===c.id?'on':''}" data-act="mapCat" data-id="${c.id}">${c.label}</button>`).join('')}</div>
     </div></div>`;
 }
@@ -825,20 +814,20 @@ function renderProfile(){
   const savedCount = new Set(state.lists.flatMap(l=>l.ids)).size;
   const n = state.notif;
   return subHeader('Profile') + `<div class="scroll"><div class="pad stack-lg" style="padding-top:18px">
-    <div class="prof-card"><span class="avatar">${initials()}</span><div><h2>${esc(state.name||'Student')}</h2><p class="hint">${esc(state.email)}</p><span class="pill good" style="margin-top:6px">${ic('shield',13)} Verified NYU student</span></div></div>
+    <div class="prof-card"><span class="avatar">${initials()}</span><div class="stack" style="gap:6px"><h2>${esc(state.name||'Student')}</h2><p class="hint">${esc(state.email)}</p><span class="flag" style="align-self:flex-start">${ic('shield',13)} Verified NYU student</span></div></div>
     <div class="stat-grid">
       <div class="stat hl"><b>${money(totalSaved())}</b><span>Saved this semester</span></div>
-      <div class="stat"><b class="num">${state.redeemed.length}</b><span>Deals used</span></div>
-      <div class="stat"><b class="num">${savedCount}</b><span>Places saved</span></div>
+      <div class="stat"><b>${state.redeemed.length}</b><span>Deals used</span></div>
+      <div class="stat"><b>${savedCount}</b><span>Places saved</span></div>
     </div>
-    <section><p class="label-sm">Recent savings</p><div class="list-card">${state.redeemed.slice(0,5).map(r=>{const p=P(r.id); return `<div class="set-row" role="button" tabindex="0" data-act="open" data-id="${p.id}" style="cursor:pointer">${thumb(p)}<div class="txt"><b>${esc(p.name)}</b><small>${esc(r.date)} · ${esc(p.deal)}</small></div><b class="num" style="color:var(--good)">−${money(r.saved)}</b></div>`;}).join('')}</div></section>
-    <section><p class="label-sm">Notifications</p><div class="list-card">
+    <section><div class="sec-head"><h2>Recent savings</h2></div><div>${state.redeemed.slice(0,5).map(r=>{const p=P(r.id); return `<div class="set-row" role="button" tabindex="0" data-act="open" data-id="${p.id}" style="cursor:pointer">${thumb(p)}<div class="txt"><b>${esc(p.name)}</b><small>${esc(r.date)} · ${esc(p.deal)}</small></div><b class="mono">−${money(r.saved)}</b></div>`;}).join('')}</div></section>
+    <section><div class="sec-head"><h2>Notifications</h2></div><div>
       ${[['near','Deals near me','When you walk past a student deal'],['saved','Saved places','New deals and restocks at places you saved'],['weekly','Weekly roundup','New deals near campus, every Monday']].map(([k,t,s])=>`<button class="set-row" data-act="toggleNotif" data-id="${k}" role="switch" aria-checked="${n[k]}"><span class="txt">${t}<small>${s}</small></span><span class="switch ${n[k]?'on':''}"></span></button>`).join('')}
     </div></section>
-    <section><p class="label-sm">Preferences</p><div class="list-card">
+    <section><div class="sec-head"><h2>Preferences</h2></div><div>
       <button class="set-row" data-act="location"><span class="txt">Home area<small>${esc(state.location)}</small></span>${ic('chevR',18)}</button>
       <div class="set-row" style="flex-direction:column;align-items:flex-start;gap:10px"><span class="txt">Interested in</span><div class="opt-grid">${CATS.map(c=>`<button class="chip sm ${state.interests.includes(c.id)?'on':''}" data-act="interest" data-id="${c.id}">${c.label}</button>`).join('')}</div></div>
-      <div class="set-row" style="flex-direction:column;align-items:flex-start;gap:10px"><span class="txt">Dietary needs<small>Used to suggest filters on the Deals tab</small></span><div class="opt-grid">${[['vegan','Vegan'],['halal','Halal'],['gf','Gluten-free']].map(([k,l])=>`<button class="chip sm ${state.diet.includes(k)?'on':''}" data-act="dietPref" data-id="${k}">${l}</button>`).join('')}</div></div>
+      <div class="set-row" style="flex-direction:column;align-items:flex-start;gap:10px"><span class="txt">Dietary needs<small>Suggested as filters on the Deals tab</small></span><div class="opt-grid">${DIET.map(([k,l])=>`<button class="chip sm ${state.diet.includes(k)?'on':''}" data-act="dietPref" data-id="${k}">${l}</button>`).join('')}</div></div>
     </div></section>
     <button class="btn outline" data-act="signOut">Sign out</button>
   </div></div>`;
@@ -846,8 +835,8 @@ function renderProfile(){
 
 function renderNotifs(){
   return subHeader('Notifications') + `<div class="scroll"><div class="pad">
-    ${NOTIFS.map((n,i)=>{const p=n.place&&P(n.place); return `<div class="notif ${!state.readNotifs&&i<2?'unread':''}" role="button" tabindex="0" data-act="${p?'open':'tab'}" data-id="${p?p.id:'deals'}">${p?thumb(p):`<div class="thumb" style="background:var(--accent-soft);color:var(--accent)">${ic('tag',24)}</div>`}<div class="txt"><b class="t1">${esc(n.title)}</b><span>${esc(n.body)}</span><small>${esc(n.when)}</small></div></div>`;}).join('')}
-    <p class="hint" style="text-align:center;padding:20px 0">Change alerts in Profile → Notifications</p>
+    ${NOTIFS.map((n,i)=>{const p=n.place&&P(n.place); return `<div class="notif ${!state.readNotifs&&i<2?'unread':''}" role="button" tabindex="0" data-act="${p?'open':'tab'}" data-id="${p?p.id:'deals'}">${p?thumb(p):`<div class="thumb">${ic('tag',22)}</div>`}<div class="txt"><b class="t1">${esc(n.title)}</b><span>${esc(n.body)}</span><small>${esc(n.when)}</small></div></div>`;}).join('')}
+    <p class="hint" style="padding:20px 0">Change alerts in Profile → Notifications.</p>
   </div></div>`;
 }
 
@@ -856,21 +845,24 @@ function renderOnb(){
   const prog = n => `<div class="progress" aria-label="Step ${n} of 4">${[1,2,3,4].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</div>`;
   const backBtn = `<button class="back" data-act="onbBack" aria-label="Back" style="width:36px;height:36px;margin-left:-8px;display:grid;place-items:center">${ic('chevL',24)}</button>`;
   if(s===0) return `<div class="onb">
-    <div class="welcome-art" aria-hidden="true">
-      <span class="tg sticker" style="--r:-8deg;left:22px;top:28px;font-size:16px;padding:10px 14px 10px 22px">$2 slices</span>
-      <span class="tg sticker" style="--r:6deg;right:24px;top:70px;font-size:16px;padding:10px 14px 10px 22px">20% off</span>
-      <span class="tg sticker" style="--r:-3deg;left:70px;top:122px;font-size:16px;padding:10px 14px 10px 22px">$1 fruit bags</span>
-      <span class="tg sticker" style="--r:9deg;right:40px;top:160px;font-size:14px;padding:8px 12px 8px 20px">15% off thrift</span>
-      <div class="wm">${APP}<small>Student deals on your block.</small></div>
+    <div><div class="wordmark">${APP}</div><div class="wordmark-sub">Student deals · Downtown Brooklyn</div></div>
+    <div class="welcome-receipt" aria-label="Example deals">
+      <div class="r"><span>Charlie’s Pizzeria</span><span class="lead"></span><span>$2 slices</span></div>
+      <div class="r"><span>The Daily Bite</span><span class="lead"></span><span>20% off</span></div>
+      <div class="r"><span>Hoyt St Produce</span><span class="lead"></span><span>$1 bags</span></div>
+      <div class="r"><span>Second Stitch</span><span class="lead"></span><span>15% off</span></div>
+      <div class="r tot"><span>Avg. saved / semester</span><span class="lead"></span><span>$38.50</span></div>
     </div>
-    <div class="stack" style="gap:8px"><h1>Eat and shop well around campus for less.</h1><p class="lead">Food, groceries and thrift deals near NYU Tandon, checked and rated by other students.</p></div>
+    <div class="stack" style="gap:10px"><h1>Eat and shop around campus for less.</h1><p class="lead">Food, groceries and thrift deals near NYU Tandon, checked and rated by other students.</p></div>
     <div class="grow"></div>
-    <button class="btn primary" data-act="onbNext">Get started</button>
-    <button class="btn ghost" data-act="onbNext">I already have an account</button>
+    <div class="stack" style="gap:4px">
+      <button class="btn primary" data-act="onbNext">Get started</button>
+      <button class="btn text" data-act="onbNext">I already have an account</button>
+    </div>
   </div>`;
   if(s===1) return `<div class="onb">${backBtn}${prog(1)}
-    <div class="stack" style="gap:8px"><h1>Verify you’re a student</h1><p class="lead">Deals are for students only. We’ll send a code to your school email.</p></div>
-    <form id="onbForm" class="stack" novalidate>
+    <div class="stack" style="gap:10px"><h1>Verify you’re a student</h1><p class="lead">Deals are for students only. We’ll send a code to your school email.</p></div>
+    <form id="onbForm" class="stack" style="gap:16px" novalidate>
       <div class="field"><label for="fName">First name</label><input class="input" id="fName" autocomplete="given-name" value="${esc(state.name)}" placeholder="Lucy"></div>
       <div class="field"><label for="fEmail">School email</label><input class="input" id="fEmail" type="email" inputmode="email" autocomplete="email" value="${esc(state.email)}" placeholder="netid@nyu.edu"></div>
       ${ui.onbErr?`<p class="err" role="alert">${esc(ui.onbErr)}</p>`:''}
@@ -879,8 +871,8 @@ function renderOnb(){
     <button class="btn primary" data-act="onbEmail">Send code</button>
   </div>`;
   if(s===2) return `<div class="onb">${backBtn}${prog(2)}
-    <div class="stack" style="gap:8px"><h1>Enter your code</h1><p class="lead">We sent a 6-digit code to <b>${esc(state.email)}</b>.</p></div>
-    <div class="field"><label for="fCode">Verification code</label><input class="input code-input" id="fCode" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="••••••"></div>
+    <div class="stack" style="gap:10px"><h1>Enter your code</h1><p class="lead">We sent a 6-digit code to <b style="color:var(--ink)">${esc(state.email)}</b>.</p></div>
+    <div class="field"><label for="fCode">Verification code</label><input class="input code-input" id="fCode" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="000000"></div>
     ${ui.onbErr?`<p class="err" role="alert">${esc(ui.onbErr)}</p>`:''}
     <p class="hint">Prototype: any 6 digits work.</p>
     <button class="link" style="align-self:flex-start" data-act="resend">Resend code</button>
@@ -888,16 +880,18 @@ function renderOnb(){
     <button class="btn primary" data-act="onbCode">Verify</button>
   </div>`;
   if(s===3) return `<div class="onb">${backBtn}${prog(3)}
-    <div class="stack" style="gap:8px"><h1>Show deals near you</h1><p class="lead">${APP} uses your location to sort deals by walking distance and tell you when you pass one.</p></div>
-    <div class="perm"><span class="ico">${ic('pin',30)}</span><b>Allow “${APP}” to use your location?</b><p class="hint">Only while you’re using the app. You can change this in Settings.</p></div>
+    <div class="stack" style="gap:10px"><h1>Show deals near you</h1><p class="lead">${APP} sorts deals by walking distance and can tell you when you pass one.</p></div>
+    <div class="perm">${ic('pin',26)}<b>Allow “${APP}” to use your location?</b><p class="hint">Only while you’re using the app. You can change this in Settings.</p></div>
     <div class="grow"></div>
-    <button class="btn primary" data-act="onbLoc" data-id="Current location">Allow while using the app</button>
-    <button class="btn outline" data-act="onbLoc" data-id="NYU Tandon">Not now, use NYU Tandon</button>
+    <div class="stack" style="gap:8px">
+      <button class="btn primary" data-act="onbLoc" data-id="Current location">Allow while using the app</button>
+      <button class="btn outline" data-act="onbLoc" data-id="NYU Tandon">Not now, use NYU Tandon</button>
+    </div>
   </div>`;
   return `<div class="onb">${backBtn}${prog(4)}
-    <div class="stack" style="gap:8px"><h1>What are you looking for?</h1><p class="lead">Pick what you want deals for. You can change this later.</p></div>
-    <div class="stack" style="gap:10px"><p class="label-sm" style="margin:0">Deals</p><div class="opt-grid">${CATS.map(c=>`<button class="chip ${state.interests.includes(c.id)?'on':''}" data-act="interest" data-id="${c.id}">${c.em} ${c.label}</button>`).join('')}</div></div>
-    <div class="stack" style="gap:10px"><p class="label-sm" style="margin:0">Dietary needs (optional)</p><div class="opt-grid">${[['vegan','Vegan'],['halal','Halal'],['gf','Gluten-free']].map(([k,l])=>`<button class="chip ${state.diet.includes(k)?'on':''}" data-act="dietPref" data-id="${k}">${l}</button>`).join('')}</div></div>
+    <div class="stack" style="gap:10px"><h1>What are you looking for?</h1><p class="lead">Pick what you want deals for. You can change this later.</p></div>
+    <div class="field"><span class="label-sm">Deals</span><div class="opt-grid">${CATS.map(c=>`<button class="chip ${state.interests.includes(c.id)?'on':''}" data-act="interest" data-id="${c.id}" aria-pressed="${state.interests.includes(c.id)}">${c.label}</button>`).join('')}</div></div>
+    <div class="field"><span class="label-sm">Dietary needs (optional)</span><div class="opt-grid">${DIET.map(([k,l])=>`<button class="chip ${state.diet.includes(k)?'on':''}" data-act="dietPref" data-id="${k}" aria-pressed="${state.diet.includes(k)}">${l}</button>`).join('')}</div></div>
     <div class="grow"></div>
     <button class="btn primary" data-act="onbDone" ${state.interests.length?'':'disabled'}>Show my deals</button>
   </div>`;
@@ -926,14 +920,13 @@ function render(anim){
   }
   view.innerHTML = `<div class="screen ${anim||''}">${html}</div>`;
   const sc = view.querySelector('.scroll');
-  if(sc && scrollMem[key] && (anim!=='push')) sc.scrollTop = scrollMem[key];
+  if(sc && scrollMem[key] && anim!=='push') sc.scrollTop = scrollMem[key];
   ui.lastKey = key;
 
   const hideTabs = v.name==='onb' || v.name==='redeem' || v.name==='map';
   tabbar.hidden = hideTabs;
   if(!hideTabs){
-    const active = ui.tab;
-    tabbar.innerHTML = [['explore','Explore','compass'],['deals','Deals','tag'],['saved','Saved','bookmark']].map(([id,l,i])=>`<button class="tab ${active===id?'on':''}" data-act="tab" data-id="${id}" aria-current="${active===id?'page':'false'}">${ic(i,22,false)}${l}</button>`).join('');
+    tabbar.innerHTML = [['explore','Explore','compass'],['deals','Deals','tag'],['saved','Saved','bookmark']].map(([id,l,i])=>`<button class="tab ${ui.tab===id?'on':''}" data-act="tab" data-id="${id}" aria-current="${ui.tab===id?'page':'false'}">${ic(i,22)}${l}</button>`).join('');
   }
   clearInterval(timerInt);
   if(v.name==='redeem' && v.step!=='done') startTimer();
@@ -947,9 +940,9 @@ function push(entry){ ui.stack.push(entry); ui.mapSel = null; render('push'); }
 function addRecent(q){ state.recent = [q, ...state.recent.filter(x=>x.toLowerCase()!==q.toLowerCase())].slice(0,4); save(); }
 
 function wireCarousel(){
-  const tr = document.getElementById('track'), dots = document.querySelectorAll('#dots i');
+  const tr = document.getElementById('track'), cnt = document.getElementById('carCount');
   if(!tr) return;
-  tr.addEventListener('scroll', () => { const i = Math.round(tr.scrollLeft / tr.clientWidth); dots.forEach((d,j)=>d.classList.toggle('on', i===j)); }, {passive:true});
+  tr.addEventListener('scroll', () => { const i = Math.round(tr.scrollLeft / tr.clientWidth); cnt.textContent = (i+1) + '/' + tr.children.length; }, {passive:true});
 }
 function startTimer(){
   ui.redeemStart = ui.redeemStart || Date.now();
@@ -959,18 +952,18 @@ function startTimer(){
 
 /* ---------------- Sheets, toast, push ---------------- */
 function openSheet(title, body, foot){
-  sheetLayer.innerHTML = `<div class="scrim" data-act="closeSheet"></div><div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="grab"></div><div class="sheet-h"><h3>${esc(title)}</h3><button class="icon-btn" data-act="closeSheet" aria-label="Close">${ic('x',20)}</button></div><div class="sheet-b" id="sheetBody">${body}</div>${foot?`<div class="sheet-f" id="sheetFoot">${foot}</div>`:''}</div>`;
+  sheetLayer.innerHTML = `<div class="scrim" data-act="closeSheet"></div><div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="grab"></div><div class="sheet-h"><h3>${esc(title)}</h3><button class="icon-btn" data-act="closeSheet" aria-label="Close" style="margin:0">${ic('x',20)}</button></div><div class="sheet-b" id="sheetBody">${body}</div>${foot?`<div class="sheet-f" id="sheetFoot">${foot}</div>`:''}</div>`;
   sheetLayer.hidden = false;
   requestAnimationFrame(() => requestAnimationFrame(() => sheetLayer.classList.add('open')));
 }
 function setSheet(body, foot){ const b = document.getElementById('sheetBody'); if(b) b.innerHTML = body; const f = document.getElementById('sheetFoot'); if(f && foot!==undefined) f.innerHTML = foot; }
-function closeSheet(){ sheetLayer.classList.remove('open'); setTimeout(()=>{ if(!sheetLayer.classList.contains('open')){ sheetLayer.hidden = true; sheetLayer.innerHTML=''; } }, 240); }
+function closeSheet(){ if(sheetLayer.hidden) return; sheetLayer.classList.remove('open'); setTimeout(()=>{ if(!sheetLayer.classList.contains('open')){ sheetLayer.hidden = true; sheetLayer.innerHTML=''; } }, 240); }
 let toastT;
 function toast(msg){ const t = document.getElementById('toast'); t.innerHTML = ic('check',16) + '<span>' + esc(msg) + '</span>'; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove('show'), 2200); }
 let pushT;
 function showPush(){
   const p = P('dailybite'); const el = document.getElementById('push');
-  el.innerHTML = `<span class="app-ico">C</span><span class="txt"><span class="h"><span>${APP.toUpperCase()}</span><span>now</span></span><b>${esc(p.name)} is 2 min away</b>20% off your order with your student ID. Tap to see the deal.</span>`;
+  el.innerHTML = `<span class="app-ico">C</span><span class="txt"><span class="h"><span>${APP}</span><span>now</span></span><b>${esc(p.name)} is 2 min away</b>20% off your order with your student ID. Tap to see the deal.</span>`;
   el.classList.add('show'); clearTimeout(pushT); pushT = setTimeout(()=>el.classList.remove('show'), 7000);
 }
 function maybePush(){
@@ -982,13 +975,13 @@ function maybePush(){
 /* Filters sheet */
 function filtersBody(){
   const f = ui.draft;
-  const box = (on) => `<span class="box ${on?'on':''}">${on?ic('check',14):''}</span>`;
+  const box = on => `<span class="box ${on?'on':''}">${on?ic('check',14):''}</span>`;
   return `
-  <div><p class="label-sm">Sort by</p><div class="seg">${Object.entries(SORT_LABEL).map(([k,l])=>`<button class="${f.sort===k?'on':''}" data-act="fSort" data-id="${k}">${l.replace(' first','')}</button>`).join('')}</div></div>
-  <div><p class="label-sm">Distance</p><div class="seg">${[[0.25,'5 min'],[0.5,'10 min'],[1,'20 min'],[99,'Any']].map(([d,l])=>`<button class="${f.dist===d?'on':''}" data-act="fDist" data-id="${d}">${l}</button>`).join('')}</div><p class="hint" style="margin-top:6px">Walking time from ${esc(state.location)}</p></div>
-  <div><p class="label-sm">Dietary</p>${[['vegan','Vegan options'],['halal','Halal'],['gf','Gluten-free']].map(([k,l])=>`<button class="check-row" data-act="fDiet" data-id="${k}" role="checkbox" aria-checked="${f.diet.includes(k)}">${box(f.diet.includes(k))}<span>${l}</span></button>`).join('')}</div>
-  <div><p class="label-sm">Vibe</p><div class="opt-grid">${[['quick','Quick grab'],['sit','Sit-down'],['study','Study-friendly'],['browse','Browse & shop']].map(([k,l])=>`<button class="chip sm ${f.vibe.includes(k)?'on':''}" data-act="fVibe" data-id="${k}">${l}</button>`).join('')}</div></div>
-  <div><p class="label-sm">Price</p><div class="opt-grid">${[[1,'$ Under $10'],[2,'$$ $10–20']].map(([k,l])=>`<button class="chip sm ${f.level.includes(k)?'on':''}" data-act="fLevel" data-id="${k}">${l}</button>`).join('')}</div></div>`;
+  <div class="field"><span class="label-sm">Sort by</span><div class="seg">${Object.entries(SORT_LABEL).map(([k,l])=>`<button class="${f.sort===k?'on':''}" data-act="fSort" data-id="${k}">${l}</button>`).join('')}</div></div>
+  <div class="field"><span class="label-sm">Walking distance</span><div class="seg">${[[0.25,'5 min'],[0.5,'10 min'],[1,'20 min'],[99,'Any']].map(([d,l])=>`<button class="${f.dist===d?'on':''}" data-act="fDist" data-id="${d}">${l}</button>`).join('')}</div><p class="hint">From ${esc(state.location)}</p></div>
+  <div class="field"><span class="label-sm">Dietary</span><div>${[['vegan','Vegan options'],['halal','Halal'],['gf','Gluten-free']].map(([k,l])=>`<button class="check-row" data-act="fDiet" data-id="${k}" role="checkbox" aria-checked="${f.diet.includes(k)}">${box(f.diet.includes(k))}<span>${l}</span></button>`).join('')}</div></div>
+  <div class="field"><span class="label-sm">Vibe</span><div class="opt-grid">${[['quick','Quick grab'],['sit','Sit-down'],['study','Study-friendly'],['browse','Browse & shop']].map(([k,l])=>`<button class="chip sm ${f.vibe.includes(k)?'on':''}" data-act="fVibe" data-id="${k}">${l}</button>`).join('')}</div></div>
+  <div class="field"><span class="label-sm">Price</span><div class="opt-grid">${[[1,'$ · under $10'],[2,'$$ · $10–20']].map(([k,l])=>`<button class="chip sm ${f.level.includes(k)?'on':''}" data-act="fLevel" data-id="${k}">${l}</button>`).join('')}</div></div>`;
 }
 function countDraft(){ const keep = ui.filters; ui.filters = ui.draft; const n = filtered(ui.dealsCat).length; ui.filters = keep; return n; }
 function filtersFoot(){ const n = countDraft(); return `<button class="btn outline" style="width:auto;padding:0 18px" data-act="fReset">Reset</button><button class="btn primary" data-act="fApply" ${n?'':'disabled'}>${n?`Show ${n} deal${n>1?'s':''}`:'No matches'}</button>`; }
@@ -998,7 +991,7 @@ function refreshFilters(){ setSheet(filtersBody(), filtersFoot()); }
 function saveBody(id){
   const p = P(id);
   return `<div class="row-item" style="cursor:default;border:0;padding:0">${thumb(p)}<div class="txt"><span class="t1">${esc(p.name)}</span><span class="meta">${esc(p.dealLong)}</span></div></div>
-  <div>${state.lists.map(l=>{const on=l.ids.includes(id); return `<button class="check-row" data-act="toggleIn" data-id="${id}" data-list="${l.id}" role="checkbox" aria-checked="${on}"><span class="box ${on?'on':''}">${on?ic('check',14):''}</span><span style="flex:1">${esc(l.name)}</span><span class="hint num">${l.ids.length}</span></button>`;}).join('')}</div>
+  <div>${state.lists.map(l=>{const on=l.ids.includes(id); return `<button class="check-row" data-act="toggleIn" data-id="${id}" data-list="${l.id}" role="checkbox" aria-checked="${on}"><span class="box ${on?'on':''}">${on?ic('check',14):''}</span><span style="flex:1">${esc(l.name)}</span><span class="hint mono">${l.ids.length}</span></button>`;}).join('')}</div>
   <form class="copy-row" id="newListForm"><input class="input" id="newListName" placeholder="New list name" maxlength="40" aria-label="New list name"><button class="btn outline" type="submit">${ic('plus',18)} Add</button></form>`;
 }
 function wireNewListForm(id){
@@ -1008,14 +1001,15 @@ function wireNewListForm(id){
 
 /* Rate sheet */
 let rateDraft = null;
-function rateBody(id){
-  const p = P(id); const d = rateDraft;
+function rateBody(){
+  const d = rateDraft;
   return `<p class="hint">Your rating is shown with other verified students’ ratings.</p>
-  <div class="stars" role="group" aria-label="Stars">${[1,2,3,4,5].map(n=>`<button data-act="rStar" data-n="${n}" class="${d.stars>=n?'on':''}" aria-label="${n} star${n>1?'s':''}">${ic('star',38,true)}</button>`).join('')}</div>
-  <div><p class="label-sm">What stood out?</p><div class="qtags">${['Worth the price','Big portions','Prices matched the app','Friendly staff','Long wait','Good for groups'].map(t=>`<button class="chip sm ${d.tags.includes(t)?'on':''}" data-act="rTag" data-t="${esc(t)}">${esc(t)}</button>`).join('')}</div></div>
+  <div class="stars" role="group" aria-label="Stars">${[1,2,3,4,5].map(n=>`<button data-act="rStar" data-n="${n}" class="${d.stars>=n?'on':''}" aria-label="${n} star${n>1?'s':''}">${ic('star',36)}</button>`).join('')}</div>
+  <div class="field"><span class="label-sm">What stood out?</span><div class="qtags">${['Worth the price','Big portions','Prices matched the app','Friendly staff','Long wait','Good for groups'].map(t=>`<button class="chip sm ${d.tags.includes(t)?'on':''}" data-act="rTag" data-t="${esc(t)}">${esc(t)}</button>`).join('')}</div></div>
   <div class="field"><label for="rNote">Tip for other students (optional)</label><textarea class="input" id="rNote" maxlength="200" placeholder="e.g. Go before 12:30, it gets busy">${esc(d.note)}</textarea></div>`;
 }
 function rateFoot(){ return `<button class="btn primary" data-act="rSubmit" ${rateDraft.stars?'':'disabled'}>${rateDraft.stars?'Post rating':'Choose a star rating'}</button>`; }
+function keepNote(){ const n = document.getElementById('rNote'); if(n) rateDraft.note = n.value; }
 
 /* ---------------- Actions ---------------- */
 const act = {
@@ -1026,15 +1020,14 @@ const act = {
   search(){ ui.query=''; push({name:'search'}); },
   sug(el){ const q = el.dataset.q; ui.query = q; const inp = document.getElementById('q'); inp.value = q; addRecent(q); document.getElementById('results').innerHTML = searchResults(q); },
   profile(){ push({name:'profile'}); },
-  notifs(){ push({name:'notifs'}); state.readNotifs = true; save(); },
+  notifs(){ state.readNotifs = true; save(); push({name:'notifs'}); },
   fullMap(){ ui.mapCat = ui.exploreCat; push({name:'map'}); },
   exCat(el,id){ ui.exploreCat = ui.exploreCat===id ? null : id; ui.mapSel=null; render(); },
   mapCat(el,id){ ui.mapCat = id || null; ui.mapSel=null; render(); },
   pin(el,id){ ui.mapSel = ui.mapSel===id ? null : id; render(); },
   dCat(el,id){ ui.dealsCat = id; render(); },
   location(){
-    const body = () => LOCATIONS.map(l=>`<button class="check-row" data-act="setLoc" data-id="${esc(l)}" role="radio" aria-checked="${state.location===l}"><span class="radio ${state.location===l?'on':''}"></span><span style="flex:1">${l==='Current location'?'Current location · Jay St':esc(l)}</span>${l==='Current location'?ic('locate',18):''}</button>`).join('');
-    openSheet('Show deals near', `<div>${body()}</div>`);
+    openSheet('Show deals near', `<div>${LOCATIONS.map(l=>`<button class="check-row" data-act="setLoc" data-id="${esc(l)}" role="radio" aria-checked="${state.location===l}"><span class="radio ${state.location===l?'on':''}"></span><span style="flex:1">${l==='Current location'?'Current location · Jay St':esc(l)}</span>${l==='Current location'?ic('locate',18):''}</button>`).join('')}</div>`);
   },
   setLoc(el,id){ state.location = id; save(); closeSheet(); render(); toast(`Showing deals near ${id}`); },
   carNext(){ const tr = document.getElementById('track'); const max = tr.scrollWidth - tr.clientWidth; tr.scrollTo({left: tr.scrollLeft >= max-4 ? 0 : tr.scrollLeft + tr.clientWidth, behavior:'smooth'}); },
@@ -1056,23 +1049,23 @@ const act = {
   rmFromList(el,id){ const l = state.lists.find(x=>x.id===el.dataset.list); l.ids = l.ids.filter(x=>x!==id); save(); render(); toast(`Removed ${P(id).name}`); },
   newList(){ openSheet('New list', `<form class="stack" id="newListForm"><div class="field"><label for="newListName">List name</label><input class="input" id="newListName" maxlength="40" placeholder="e.g. Study spots"></div><button class="btn primary" type="submit">Create list</button></form>`); wireNewListForm(null); setTimeout(()=>{const i=document.getElementById('newListName'); if(i) i.focus();},250); },
   renameList(el,id){ const l = state.lists.find(x=>x.id===id); openSheet('Rename list', `<form class="stack" id="renameForm"><div class="field"><label for="renameInp">List name</label><input class="input" id="renameInp" maxlength="40" value="${esc(l.name)}"></div><button class="btn primary" type="submit">Save</button></form>`); document.getElementById('renameForm').addEventListener('submit', e=>{ e.preventDefault(); const v=document.getElementById('renameInp').value.trim(); if(!v) return; l.name=v; save(); closeSheet(); render(); toast('List renamed'); }); },
-  delList(el,id){ const l = state.lists.find(x=>x.id===id); openSheet('Delete this list?', `<p>“${esc(l.name)}” and its ${l.ids.length} saved place${l.ids.length===1?'':'s'} will be removed. The places themselves stay in ${APP}.</p>`, `<button class="btn outline" data-act="closeSheet">Cancel</button><button class="btn danger" data-act="delListYes" data-id="${id}">Delete list</button>`); },
+  delList(el,id){ const l = state.lists.find(x=>x.id===id); openSheet('Delete this list?', `<p>“${esc(l.name)}” and its ${l.ids.length} saved place${l.ids.length===1?'':'s'} will be removed. The places stay in ${APP}.</p>`, `<button class="btn outline" data-act="closeSheet">Cancel</button><button class="btn primary" data-act="delListYes" data-id="${id}">Delete list</button>`); },
   delListYes(el,id){ const l = state.lists.find(x=>x.id===id); state.lists = state.lists.filter(x=>x.id!==id); save(); closeSheet(); render(); toast(`Deleted “${l.name}”`); },
 
   share(el,id){
-    const p = P(id); const url = `corner.app/d/${p.id}`;
+    const p = P(id);
     openSheet(`Share ${p.name}`, `<p class="hint">Send this deal to a friend: ${esc(p.dealLong)}.</p>
-      <div class="share-grid">${[['💬','Messages'],['🟢','WhatsApp'],['📸','Instagram'],['✉️','Email']].map(([e,l])=>`<button class="share-t" data-act="shareTo" data-id="${l}"><span class="c">${e}</span>${l}</button>`).join('')}</div>
-      <div class="copy-row"><input class="input" id="shareUrl" readonly value="${url}" aria-label="Deal link"><button class="btn outline" data-act="copyLink">${ic('copy',18)} Copy</button></div>`);
+      <div class="share-grid">${[['msg','Messages'],['phone','WhatsApp'],['camera','Instagram'],['mail','Email']].map(([i,l])=>`<button class="share-t" data-act="shareTo" data-id="${l}">${ic(i,24)}${l}</button>`).join('')}</div>
+      <div class="copy-row"><input class="input" id="shareUrl" readonly value="corner.app/d/${p.id}" aria-label="Deal link"><button class="btn outline" data-act="copyLink">${ic('copy',18)} Copy</button></div>`);
   },
   shareTo(el,id){ closeSheet(); toast(`Shared via ${id}`); },
-  copyLink(){ const inp = document.getElementById('shareUrl'); const done = () => { closeSheet(); toast('Link copied'); }; try{ navigator.clipboard.writeText(inp.value).then(done, () => { inp.select(); toast('Link selected. Press Ctrl+C to copy'); }); }catch(e){ inp.select(); toast('Link selected. Press Ctrl+C to copy'); } },
+  copyLink(){ const inp = document.getElementById('shareUrl'); const done = () => { closeSheet(); toast('Link copied'); }; const fallback = () => { inp.select(); toast('Link selected. Press Ctrl+C to copy'); }; try{ navigator.clipboard.writeText(inp.value).then(done, fallback); }catch(e){ fallback(); } },
   directions(el,id){ const p = P(id); toast(`${p.walk} min walk · opens in your maps app`); },
 
-  rate(el,id){ const m = state.ratings[id]; rateDraft = {id, stars:m?m.stars:0, tags:m?m.tags.slice():[], note:m?m.note:''}; openSheet(`Rate ${P(id).name}`, rateBody(id), rateFoot()); },
-  rStar(el){ rateDraft.note = (document.getElementById('rNote')||{}).value || rateDraft.note; rateDraft.stars = +el.dataset.n; setSheet(rateBody(rateDraft.id), rateFoot()); },
-  rTag(el){ rateDraft.note = (document.getElementById('rNote')||{}).value || rateDraft.note; const t = el.dataset.t; rateDraft.tags = rateDraft.tags.includes(t) ? rateDraft.tags.filter(x=>x!==t) : rateDraft.tags.concat(t); setSheet(rateBody(rateDraft.id), rateFoot()); },
-  rSubmit(){ rateDraft.note = (document.getElementById('rNote')||{}).value || ''; state.ratings[rateDraft.id] = {stars:rateDraft.stars, tags:rateDraft.tags, note:rateDraft.note}; save(); closeSheet(); render(); toast('Rating posted'); },
+  rate(el,id){ const m = state.ratings[id]; rateDraft = {id, stars:m?m.stars:0, tags:m?m.tags.slice():[], note:m?m.note:''}; openSheet(`Rate ${P(id).name}`, rateBody(), rateFoot()); },
+  rStar(el){ keepNote(); rateDraft.stars = +el.dataset.n; setSheet(rateBody(), rateFoot()); },
+  rTag(el){ keepNote(); const t = el.dataset.t; rateDraft.tags = rateDraft.tags.includes(t) ? rateDraft.tags.filter(x=>x!==t) : rateDraft.tags.concat(t); setSheet(rateBody(), rateFoot()); },
+  rSubmit(){ keepNote(); state.ratings[rateDraft.id] = {stars:rateDraft.stars, tags:rateDraft.tags, note:rateDraft.note}; save(); closeSheet(); render(); toast('Rating posted'); },
   quickRate(el,id){ state.ratings[id] = Object.assign({tags:[],note:''}, state.ratings[id], {stars:+el.dataset.n}); save(); render(); toast('Rating posted'); },
 
   redeemAsk(el,id){ const p = P(id); openSheet('Use this offer now?', `<div class="row-item" style="cursor:default;border:0;padding:0">${thumb(p)}<div class="txt"><span class="t1">${esc(p.name)}</span><span class="meta">${esc(p.dealLong)}</span></div></div>
@@ -1085,7 +1078,7 @@ const act = {
   toggleNotif(el,id){ state.notif[id] = !state.notif[id]; save(); render(); },
   interest(el,id){ const a = state.interests; state.interests = a.includes(id) ? a.filter(x=>x!==id) : a.concat(id); save(); render(); },
   dietPref(el,id){ const a = state.diet; state.diet = a.includes(id) ? a.filter(x=>x!==id) : a.concat(id); ui.dietSuggested = false; save(); render(); },
-  signOut(){ openSheet('Sign out?', `<p>You’ll need your school email to sign back in. In this prototype, signing out restarts from the welcome screen and clears your changes.</p>`, `<button class="btn outline" data-act="closeSheet">Cancel</button><button class="btn danger" data-act="resetAll">Sign out</button>`); },
+  signOut(){ openSheet('Sign out?', `<p>You’ll need your school email to sign back in. In this prototype, signing out restarts from the welcome screen and clears your changes.</p>`, `<button class="btn outline" data-act="closeSheet">Cancel</button><button class="btn primary" data-act="resetAll">Sign out</button>`); },
 
   onbNext(){ ui.onbErr=''; ui.onb++; render('push'); },
   onbBack(){ ui.onbErr=''; ui.onb = Math.max(0, ui.onb-1); render('back'); },
@@ -1098,11 +1091,11 @@ const act = {
   },
   onbCode(){ const c = document.getElementById('fCode').value; if(c.length!==6){ ui.onbErr = 'Enter all 6 digits from the email.'; return render(); } ui.onbErr=''; ui.onb=3; render('push'); },
   resend(){ toast(`New code sent to ${state.email}`); },
-  onbLoc(el,id){ state.location = id==='Current location' ? 'Current location' : 'NYU Tandon'; ui.onb=4; render('push'); },
+  onbLoc(el,id){ state.location = id; ui.onb=4; render('push'); },
   onbDone(){ state.onboarded = true; save(); ui.tab='explore'; ui.stack=[]; render('fade'); toast(`Welcome, ${state.name}`); },
 
-  resetAll(){ try{ localStorage.removeItem(KEY); }catch(e){} state = defaults(); Object.assign(ui, {tab:'explore',stack:[],exploreCat:null,dealsCat:'all',mapCat:null,mapSel:null,filters:{diet:[],vibe:[],level:[],dist:99,sort:'near'},open:{l1:true},editList:null,onb:0,onbErr:'',query:'',pushShown:false,dietSuggested:false}); closeSheet(); document.getElementById('push').classList.remove('show'); render('fade'); },
-  skipOnb(){ if(!state.onboarded){ state.onboarded = true; state.name = state.name || 'Lucy'; state.email = /\.edu$/.test(state.email) ? state.email : 'la2391@nyu.edu'; save(); } ui.stack=[]; ui.tab='explore'; ui.pushShown = true; render('fade'); },
+  resetAll(){ try{ localStorage.removeItem(KEY); }catch(e){} state = defaults(); Object.assign(ui, freshUI()); closeSheet(); document.getElementById('push').classList.remove('show'); render('fade'); },
+  skipOnb(){ if(!state.onboarded){ state.onboarded = true; state.name = state.name || 'Lucy'; state.email = /\.edu$/.test(state.email) ? state.email : 'la2391@nyu.edu'; save(); } ui.stack=[]; ui.tab='explore'; ui.pushShown = true; closeSheet(); render('fade'); },
   demoPush(){ if(!state.onboarded) act.skipOnb(); showPush(); },
   pushOpen(){ document.getElementById('push').classList.remove('show'); if(state.onboarded) act.open(null,'dailybite'); },
   closeSheet(){ closeSheet(); }
